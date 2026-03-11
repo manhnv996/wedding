@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiệp Mời Đám Cưới</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #d4a373;
+            --text-color: #4a4a4a;
+            --bg-color: #fefae0;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            perspective: 1500px;
+            width: 90%;
+            max-width: 400px;
+            height: 600px;
+            cursor: pointer;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .container.open .card {
+            transform: rotateY(-180deg);
+        }
+
+        .card-front, .card-inside {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 8px solid #fff;
+        }
+
+        /* Front Page */
+        .card-front {
+            background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), 
+                        url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .card-front h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .guest-box {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px dashed var(--primary-color);
+            width: 80%;
+        }
+
+        .guest-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .guest-name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: #bc6c25;
+        }
+
+        .click-hint {
+            position: absolute;
+            bottom: 30px;
+            font-size: 0.8rem;
+            animation: bounce 2s infinite;
+        }
+
+        /* Inside Page */
+        .card-inside {
+            background-color: var(--card-bg);
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            text-align: center;
+            justify-content: space-around;
+        }
+
+        .wedding-header {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+
+        .couple-names {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.8rem;
+            margin: 15px 0;
+            color: #333;
+        }
+
+        .couple-names span {
+            display: block;
+            font-size: 1.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-style: normal;
+        }
+
+        .details {
+            margin: 20px 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            padding: 20px 0;
+        }
+
+        .details p {
+            margin: 8px 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .details strong {
+            display: block;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .thank-you {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .decor-img {
+            width: 100px;
+            margin: 0 auto;
+            opacity: 0.6;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        @media (max-height: 700px) {
+            .container { height: 500px; }
+            .card-front h1 { font-size: 2.5rem; }
+            .couple-names { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="cardContainer">
+        <div class="card">
+            <!-- Mặt ngoài -->
+            <div class="card-front">
+                <h1>Wedding Invitation</h1>
+                <div class="guest-box">
+                    <p class="guest-label">Thân mời</p>
+                    <p class="guest-name" id="guestNameDisplay">Bạn và Gia Đình</p>
+                </div>
+                <p class="click-hint">Chạm để mở thiệp</p>
+            </div>
+
+            <!-- Mặt trong -->
+            <div class="card-inside">
+                <p class="wedding-header">Trân trọng kính mời tới dự lễ thành hôn của</p>
+                
+                <div class="couple-names">
+                    Nguyễn Văn Tú
+                    <span>&</span>
+                    Trần Thu Thảo
+                </div>
+
+                <img src="https://cdn-icons-png.flaticon.com/512/2904/2904973.png" class="decor-img" alt="wedding-rings">
+
+                <div class="details">
+                    <p>
+                        <strong>Thời gian</strong>
+                        11:00 AM | Chủ nhật, 20/12/2026
+                    </p>
+                    <p>
+                        <strong>Địa điểm</strong>
+                        Trung tâm Hội nghị Tiệc cưới ABC<br>
+                        123 Đường Láng, Đống Đa, Hà Nội
+                    </p>
+                </div>
+
+                <p class="thank-you">Sự hiện diện của bạn là niềm vinh hạnh của chúng mình!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Lấy tên khách mời từ URL parameter 'to'
+        // Ví dụ: index.html?to=Anh%20Hoàng
+        function getGuestName() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const guest = urlParams.get('to');
+            if (guest) {
+                document.getElementById('guestNameDisplay').textContent = guest;
+            }
+        }
+
+        // Hiệu ứng mở thiệp
+        const container = document.getElementById('cardContainer');
+        container.addEventListener('click', () => {
+            container.classList.toggle('open');
+        });
+
+        window.onload = getGuestName;
+    </script>
+</body>
+</html>
