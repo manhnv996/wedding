@@ -26,17 +26,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            /*min-height: 100vh;*/
             min-height: 100dvh;
             overflow-x: hidden;
         }
 
         .container {
-            /*perspective: 1500px;
-            width: 90%;
-            max-width: 480px;
-            height: 1136px;
-            cursor: pointer;*/
             perspective: 1500px;
             width: 90%;
             max-width: 480px;
@@ -189,8 +184,8 @@
             60% {transform: translateY(-5px);}
         }
 
-        @media (max-height: 700px) {
-            .container { height: 500px; }
+        @media (max-height: 900px) {
+            .container { height: 700px; }
             .card-front h1 { font-size: 2.5rem; }
             .couple-names { font-size: 2.2rem; }
         }
