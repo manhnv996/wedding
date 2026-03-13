@@ -26,7 +26,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            /*min-height: 100vh;*/
             min-height: 100dvh;
             overflow-x: hidden;
         }
@@ -34,9 +33,8 @@
         .container {
             perspective: 1500px;
             width: 90%;
-            max-width: 480px;
-            height: 100dvh; /* full chiều cao màn hình mobile */
-            max-height: 900px; /* tránh quá dài trên màn lớn */
+            max-width: 400px;
+            height: 650px;
             cursor: pointer;
         }
 
@@ -64,7 +62,6 @@
         }
 
         .card-front {
-            overflow: hidden;
             background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), 
                         url('img/wedding-bg.jpg');
             background-size: cover;
@@ -79,7 +76,7 @@
 
         .card-front h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 3.5rem;
+            font-size: 3rem;
             color: var(--primary-color);
             margin-bottom: 20px;
         }
@@ -101,7 +98,7 @@
 
         .guest-name {
             font-family: 'Dancing Script', cursive;
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: #bc6c25;
         }
 
@@ -118,11 +115,10 @@
             transform: rotateY(180deg);
             display: flex;
             flex-direction: column;
-            padding: 30px;
+            padding: 20px;
             text-align: center;
-            /*justify-content: space-around;*/
-            justify-content: space-between;
-            /*overflow-y: auto; /* Thêm cuộn nếu màn hình quá nhỏ */*/
+            justify-content: center;
+            gap: 10px;
         }
 
         .wedding-header {
@@ -134,36 +130,36 @@
 
         .couple-names {
             font-family: 'Great Vibes', cursive;
-            font-size: 2.4rem;
-            margin: 15px 0;
+            font-size: 2.2rem;
+            margin: 5px 0;
             color: #333;
         }
 
         .couple-names span {
             display: block;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-family: 'Montserrat', sans-serif;
             font-style: normal;
         }
 
         .details {
-            margin: 20px 0;
+            margin: 5px 0;
             border-top: 1px solid #eee;
             border-bottom: 1px solid #eee;
-            padding: 20px 0;
+            padding: 10px 0;
         }
 
         .details p {
-            margin: 8px 0;
-            font-size: 0.95rem;
-            line-height: 1.6;
+            margin: 5px 0;
+            font-size: 0.85rem;
+            line-height: 1.4;
         }
 
         .details strong {
             display: block;
             color: var(--primary-color);
-            font-size: 1.1rem;
-            margin-bottom: 5px;
+            font-size: 0.95rem;
+            margin-bottom: 2px;
         }
 
         .thank-you {
@@ -172,8 +168,30 @@
             color: var(--primary-color);
         }
 
+        .qr-container {
+            display: none; /* Mặc định ẩn */
+            flex-direction: column;
+            align-items: center;
+            margin-top: 2px;
+        }
+
+        .qr-code {
+            width: 24px;
+            height: 24px;
+            border: 1px solid #eee;
+            padding: 1px;
+            border-radius: 2px;
+            background: #fff;
+        }
+
+        .qr-label {
+            font-size: 0.65rem;
+            color: #888;
+            margin-top: 3px;
+        }
+
         .decor-img {
-            width: 100px;
+            width: 60px;
             margin: 0 auto;
             opacity: 0.6;
         }
@@ -184,10 +202,10 @@
             60% {transform: translateY(-5px);}
         }
 
-        @media (max-height: 900px) {
-            .container { height: 700px; }
+        @media (max-height: 700px) {
+            .container { height: 580px; }
             .card-front h1 { font-size: 2.5rem; }
-            .couple-names { font-size: 2.2rem; }
+            .couple-names { font-size: 2rem; }
         }
     </style>
 </head>
@@ -210,9 +228,9 @@
                 <p class="wedding-header">Trân trọng kính mời tới dự lễ thành hôn của</p>
                 
                 <div class="couple-names">
-                    Nguyễn Văn Mạnh
+                    Văn Mạnh
                     <span>&</span>
-                    Nguyễn Thị Huyền Trang
+                    Huyền Trang
                 </div>
 
                 <img src="img/rings-icon.png" class="decor-img" alt="wedding-rings">
@@ -230,18 +248,29 @@
                 </div>
 
                 <p class="thank-you">Sự hiện diện của bạn là niềm vinh hạnh của chúng mình!</p>
+
+                <div class="qr-container" id="qrContainer">
+                    <img src="img/qr.jpg" class="qr-code" alt="QR Code">
+                    <!-- <p class="qr-label">Mừng cưới qua mã QR</p> -->
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Lấy tên khách mời từ URL parameter 'to'
-        // Ví dụ: index.html?to=Anh%20Hoàng
-        function getGuestName() {
+        function initInvitation() {
             const urlParams = new URLSearchParams(window.location.search);
+            
+            // 1. Xử lý tên khách mời
             const guest = urlParams.get('to');
             if (guest) {
                 document.getElementById('guestNameDisplay').textContent = guest;
+            }
+
+            // 2. Xử lý hiển thị mã QR
+            const showQr = urlParams.get('qr');
+            if (showQr === 'true') {
+                document.getElementById('qrContainer').style.display = 'flex';
             }
         }
 
@@ -251,7 +280,7 @@
             container.classList.toggle('open');
         });
 
-        window.onload = getGuestName;
+        window.onload = initInvitation;
     </script>
 </body>
 </html>
