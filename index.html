@@ -238,7 +238,6 @@
                 <h2 id="thankYouTitle" style="font-size: 3.2rem; margin-bottom: 20px;"></h2>
                 <p id="thankYouMessage" style="font-size: 0.95rem; line-height: 1.8; color: #666; padding: 50 50px;"></p>
                 <div id="qrContainer"></div>
-                <p id="coupleNamesB" style="margin-top: 45px; font-family: 'Dancing Script', cursive; color: var(--autumn-red); font-size: 2.2rem;"></p>
             </div>
         </section>
     </div>
@@ -266,25 +265,33 @@
             leafImages: [
                 'img/maple_leaf/leaf_1.png',
                 'img/maple_leaf/leaf_2.png',
-                'img/maple_leaf/leaf_3.png'
+                'img/maple_leaf/leaf_3.jpg'
             ]
         };
 
         function applyConfig() {
-            document.getElementById('coupleNamesA').innerHTML = `${CONFIG.groomName}<br><span style="font-size: 1.2rem; display: inline-block; margin: 2px 0;">&</span><br>${CONFIG.brideName}`;
-            document.getElementById('eventTitle').textContent = CONFIG.eventTitle;
-            document.getElementById('eventTime').textContent = CONFIG.eventTime;
-            document.getElementById('eventDate').textContent = CONFIG.eventDate;
-            document.getElementById('locationTitle').textContent = CONFIG.locationTitle;
-            document.getElementById('locationName').textContent = CONFIG.locationName;
-            document.getElementById('locationAddress').textContent = CONFIG.locationAddress;
-            document.getElementById('thankYouTitle').textContent = CONFIG.thankYouTitle;
-            document.getElementById('thankYouMessage').textContent = CONFIG.thankYouMessage;
-            document.getElementById('coupleNamesB').textContent = `${CONFIG.groomName} & ${CONFIG.brideName}`;
-            document.getElementById('invitationGreeting').textContent = CONFIG.invitationGreeting;
-            document.getElementById('sleeveHint').textContent = CONFIG.sleeveHint;
-            document.getElementById('cardATopText').textContent = CONFIG.cardATopText;
-            document.getElementById('scrollHint').textContent = CONFIG.scrollHint;
+            const setSafeText = (id, text) => {
+                const el = document.getElementById(id);
+                if (el) el.textContent = text;
+            };
+            const setSafeHTML = (id, html) => {
+                const el = document.getElementById(id);
+                if (el) el.innerHTML = html;
+            };
+
+            setSafeHTML('coupleNamesA', `${CONFIG.groomName}<br><span style="font-size: 1.2rem; display: inline-block; margin: 2px 0;">&</span><br>${CONFIG.brideName}`);
+            setSafeText('eventTitle', CONFIG.eventTitle);
+            setSafeText('eventTime', CONFIG.eventTime);
+            setSafeText('eventDate', CONFIG.eventDate);
+            setSafeText('locationTitle', CONFIG.locationTitle);
+            setSafeText('locationName', CONFIG.locationName);
+            setSafeText('locationAddress', CONFIG.locationAddress);
+            setSafeText('thankYouTitle', CONFIG.thankYouTitle);
+            setSafeText('thankYouMessage', CONFIG.thankYouMessage);
+            setSafeText('invitationGreeting', CONFIG.invitationGreeting);
+            setSafeText('sleeveHint', CONFIG.sleeveHint);
+            setSafeText('cardATopText', CONFIG.cardATopText);
+            setSafeText('scrollHint', CONFIG.scrollHint);
         }
 
         const state = { guest: CONFIG.defaultGuest, showQr: false };
