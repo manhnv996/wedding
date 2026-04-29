@@ -21,41 +21,43 @@
 
         .page-bg {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0; left: 0; width: 100%; height: 100dvh;
             background-image: linear-gradient(rgba(255,251,240,0.85), rgba(255,251,240,0.85)), url('img/wedding-bg.jpg');
             background-size: cover; background-position: center; z-index: -1;
         }
 
         .slider-container { 
-            width: 100%; height: 100vh; overflow-y: scroll; overflow-x: hidden;
+            width: 100%; height: 100dvh; overflow-y: scroll; overflow-x: hidden;
             scroll-snap-type: y mandatory; scroll-behavior: smooth; 
             scrollbar-width: none; position: relative; z-index: 10;
         }
         .slider-container::-webkit-scrollbar { display: none; }
 
         .slide { 
-            width: 100%; height: 100vh; 
+            width: 100%; height: 100dvh; 
             scroll-snap-align: start; scroll-snap-stop: always;
             display: flex; justify-content: center; align-items: center;
             position: relative;
         }
 
-        /* NHÂN THIỆP A - FIXED 
-           Luôn neo ở top: 50% để căn giữa tuyệt đối
-        */
-        .fixed-card-a {
+        /* KHUNG CHỨA CỐ ĐỊNH - DÙNG FLEX ĐỂ CĂN GIỮA CHUẨN NHƯ V1 */
+        .fixed-stage {
             position: fixed;
-            top: 50%; 
-            left: 0; right: 0; margin: 0 auto;
-            //transform: translateY(calc(-50% - 100px)); /* Mặc định nhô lên ở Slide 1 */
-            transform: translateY(-75% - 100px); /* Mặc định nhô lên ở Slide 1 */
+            top: 0; left: 0; width: 100%; height: 100dvh;
+            display: flex; justify-content: center; align-items: center;
+            pointer-events: none; z-index: 50;
+        }
+
+        /* NHÂN THIỆP A */
+        .fixed-card-a {
+            position: relative; /* Chuyển từ fixed sang relative bên trong khung flex */
+            transform: translateY(-100px); /* Nhô lên 100px ở Slide 1 */
             width: 90%; max-width: 400px;
             height: 650px;
             background: var(--card-white);
             border-radius: var(--card-radius);
             border: 8px solid #fff;
             box-shadow: 0 15px 45px rgba(0,0,0,0.1);
-            z-index: 50;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             text-align: center; padding: 40px 20px;
             pointer-events: none;
@@ -73,20 +75,21 @@
             transition: opacity 0.2s ease-in-out;
             z-index: -1;
         }
-
         .fixed-card-a.show-bg::before { opacity: 1; }
 
-        /* BAO THIỆP - FIXED */
-        .fixed-sleeve {
+        /* BAO THIỆP */
+        .fixed-sleeve-container {
             position: fixed;
-            top: 50%; 
-            left: 0; right: 0; margin: 0 auto;
-            //transform: translateY(-50% + 100px);
-			transform: translateY(-100%);
+            top: 0; left: 0; width: 100%; height: 100dvh;
+            display: flex; justify-content: center; align-items: center;
+            pointer-events: none; z-index: 100;
+        }
+
+        .fixed-sleeve {
+            position: relative;
             width: 100%; max-width: 460px;
             height: 380px;
             background: var(--sleeve-bg);
-            z-index: 100;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             box-shadow: 0 20px 60px rgba(0,0,0,0.12);
             pointer-events: none;
@@ -144,12 +147,12 @@
             transform: scale(1) translateY(0);
         }
 
-        .leaf-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 150; overflow: hidden; }
+        .leaf-container { position: fixed; top: 0; left: 0; width: 100%; height: 100dvh; pointer-events: none; z-index: 150; overflow: hidden; }
         .leaf { position: absolute; top: -50px; }
         @keyframes leaf-fall {
             0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 0; }
             10% { opacity: 0.8; }
-            100% { transform: translateY(110vh) rotate(720deg) translateX(100px); opacity: 0; }
+            100% { transform: translateY(110dvh) rotate(720deg) translateX(100px); opacity: 0; }
         }
 
         .scroll-hint { 
@@ -165,8 +168,8 @@
             animation: card-bounce 2s infinite;
         }
         @keyframes card-bounce { 
-            0%, 100% { transform: translateY(calc(-75% - 100px)); } 
-            50% { transform: translateY(calc(-75% - 120px)); } 
+            0%, 100% { transform: translateY(-100px); } 
+            50% { transform: translateY(-120px); } 
         }
 
         .qr-card-wrap {
@@ -179,11 +182,9 @@
         @media (max-height: 700px) {
             .fixed-card-a, .card-b, .fixed-sleeve { scale: 0.9; }
         }
-
         @media (max-height: 620px) {
             .fixed-card-a, .card-b, .fixed-sleeve { scale: 0.8; }
         }
-
         @media (max-height: 550px) {
             .fixed-card-a, .card-b, .fixed-sleeve { scale: 0.7; }
         }
@@ -193,30 +194,35 @@
     <div class="page-bg"></div>
     <div class="leaf-container" id="leafContainer"></div>
 
-    <div class="fixed-sleeve" id="fixedSleeve">
-        <div class="sleeve-info">
-            <span id="invitationGreeting" style="font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: #aaa;"></span>
-            <h2 id="guestDisplay" style="font-size: 2rem; margin-top: 10px; color: var(--autumn-red);"></h2>
-            <p id="sleeveHint" style="font-size: 0.6rem; color: #ccc; margin-top: 12px; letter-spacing: 1px;"></p>
+    <!-- KHUNG FLEX ĐỂ CĂN GIỮA NHƯ V1 -->
+    <div class="fixed-stage">
+        <div class="fixed-card-a bouncing" id="cardA">
+            <div class="card-a-text" id="cardAText">
+                <span id="cardATopText" style="font-size: 0.8rem; letter-spacing: 4px; color: #ccc; text-transform: uppercase;"></span>
+                <h1 class="romantic-title" id="coupleNamesA"></h1>
+                <div class="info-divider"></div>
+                <div class="details-text">
+                    <p id="eventTitle" style="color: var(--autumn-orange); font-weight: 600; letter-spacing: 1px;"></p>
+                    <p id="eventTime" style="margin-top: 10px;"></p>
+                    <p id="eventDate" style="font-size: 1.5rem; font-weight: 600; color: #333;"></p>
+                    <div style="height: 30px;"></div>
+                    <p id="locationTitle" style="color: var(--autumn-orange); font-weight: 600; letter-spacing: 1px;"></p>
+                    <p id="locationName"></p>
+                    <p id="locationAddress" style="font-size: 0.85rem; color: #888;"></p>
+                </div>
+                <div class="info-divider"></div>
+                <img src="img/rings-icon.png" style="width: 50px; opacity: 0.5;" alt="rings">
+            </div>
         </div>
     </div>
 
-    <div class="fixed-card-a bouncing" id="cardA">
-        <div class="card-a-text" id="cardAText">
-            <span id="cardATopText" style="font-size: 0.8rem; letter-spacing: 4px; color: #ccc; text-transform: uppercase;"></span>
-            <h1 class="romantic-title" id="coupleNamesA"></h1>
-            <div class="info-divider"></div>
-            <div class="details-text">
-                <p id="eventTitle" style="color: var(--autumn-orange); font-weight: 600; letter-spacing: 1px;"></p>
-                <p id="eventTime" style="margin-top: 10px;"></p>
-                <p id="eventDate" style="font-size: 1.5rem; font-weight: 600; color: #333;"></p>
-                <div style="height: 30px;"></div>
-                <p id="locationTitle" style="color: var(--autumn-orange); font-weight: 600; letter-spacing: 1px;"></p>
-                <p id="locationName"></p>
-                <p id="locationAddress" style="font-size: 0.85rem; color: #888;"></p>
+    <div class="fixed-sleeve-container">
+        <div class="fixed-sleeve" id="fixedSleeve">
+            <div class="sleeve-info">
+                <span id="invitationGreeting" style="font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: #aaa;"></span>
+                <h2 id="guestDisplay" style="font-size: 2rem; margin-top: 10px; color: var(--autumn-red);"></h2>
+                <p id="sleeveHint" style="font-size: 0.6rem; color: #ccc; margin-top: 12px; letter-spacing: 1px;"></p>
             </div>
-            <div class="info-divider"></div>
-            <img src="img/rings-icon.png" style="width: 50px; opacity: 0.5;" alt="rings">
         </div>
     </div>
 
@@ -282,11 +288,9 @@
                 if (!val) return null;
                 try { return decodeURIComponent(val); } catch (e) { return val; }
             };
-
             let guest = getParam('to');
             let showQr = getParam('qr');
             const payload = urlParams.get('p');
-
             if (payload) {
                 try {
                     const decodedData = decodeURIComponent(escape(window.atob(payload)));
@@ -295,11 +299,9 @@
                     if (params.get('qr')) showQr = params.get('qr');
                 } catch (e) { console.error("Payload error"); }
             }
-
             if (guest) state.guest = guest;
             document.getElementById('guestDisplay').textContent = state.guest;
             state.showQr = (showQr === 'true');
-            
             const qrContainer = document.getElementById('qrContainer');
             if (state.showQr) {
                 qrContainer.innerHTML = `
@@ -361,13 +363,12 @@
 
             if (scrollTop <= vh) {
                 const ratio = scrollTop / vh;
-                // Sleeve trượt lên
-                sleeve.style.transform = `translateY(calc(-100% - ${scrollTop}px))`;
+                // Di chuyển sleeve
+                sleeve.style.transform = `translateY(${-scrollTop}px)`;
                 
-                // Card A trượt từ vị trí nhô lên (-100px so với tâm) về đúng tâm (0px)
+                // Di chuyển card A từ -100px về 0px (tâm khung flex)
                 const currentOffset = -100 * (1 - ratio);
-                //const currentOffset = -0 * (1 - ratio);
-                cardA.style.transform = `translateY(calc(-75% + ${currentOffset}px))`;
+                cardA.style.transform = `translateY(${currentOffset}px)`;
                 
                 if (ratio > 0.6) {
                     cardAText.classList.add('show-text');
@@ -379,17 +380,13 @@
                 cardA.style.opacity = 1;
             } else {
                 const overScroll = scrollTop - vh;
-                //const overScroll = 0;
                 // Trượt lên cùng Slide 3
-                cardA.style.transform = `translateY(calc(-75% - ${overScroll}px))`;
-                
+                cardA.style.transform = `translateY(${-overScroll}px)`;
                 if (index >= 2) cardA.style.opacity = 0;
                 else cardA.style.opacity = 1;
-
                 cardAText.classList.add('show-text');
                 cardA.classList.add('show-bg');
             }
-
             manageLeaves(scrollTop, vh);
         });
 
