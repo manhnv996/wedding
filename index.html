@@ -1,1 +1,399 @@
-<script>document.write(new TextDecoder().decode(Uint8Array.from(atob('PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9InZpIj4KPGhlYWQ+CiAgICA8bWV0YSBjaGFyc2V0PSJVVEYtOCI+CiAgICA8bWV0YSBuYW1lPSJ2aWV3cG9ydCIgY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLCBpbml0aWFsLXNjYWxlPTEuMCI+CiAgICA8dGl0bGU+VGhp4buHcCBN4budaSDEkMOhbSBDxrDhu5tpPC90aXRsZT4KICAgIDxsaW5rIGhyZWY9Imh0dHBzOi8vZm9udHMuZ29vZ2xlYXBpcy5jb20vY3NzMj9mYW1pbHk9RGFuY2luZytTY3JpcHQ6d2dodEA3MDAmZmFtaWx5PUdyZWF0K1ZpYmVzJmZhbWlseT1Nb250c2VycmF0OndnaHRAMzAwOzQwMDs2MDAmZmFtaWx5PVBsYXlmYWlyK0Rpc3BsYXk6aXRhbCx3Z2h0QDAsNzAwOzEsNDAwJmRpc3BsYXk9c3dhcCIgcmVsPSJzdHlsZXNoZWV0Ij4KICAgIDxzdHlsZT4KICAgICAgICA6cm9vdCB7CiAgICAgICAgICAgIC0tcHJpbWFyeS1jb2xvcjogI2Q0YTM3MzsKICAgICAgICAgICAgLS10ZXh0LWNvbG9yOiAjNGE0YTRhOwogICAgICAgICAgICAtLWJnLWNvbG9yOiAjZmVmYWUwOwogICAgICAgICAgICAtLWNhcmQtYmc6ICNmZmZmZmY7CiAgICAgICAgfQoKICAgICAgICAqIHsKICAgICAgICAgICAgYm94LXNpemluZzogYm9yZGVyLWJveDsKICAgICAgICAgICAgbWFyZ2luOiAwOwogICAgICAgICAgICBwYWRkaW5nOiAwOwogICAgICAgIH0KCiAgICAgICAgYm9keSB7CiAgICAgICAgICAgIGZvbnQtZmFtaWx5OiAnTW9udHNlcnJhdCcsIHNhbnMtc2VyaWY7CiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWJnLWNvbG9yKTsKICAgICAgICAgICAgY29sb3I6IHZhcigtLXRleHQtY29sb3IpOwogICAgICAgICAgICBkaXNwbGF5OiBmbGV4OwogICAgICAgICAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjsKICAgICAgICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjsKICAgICAgICAgICAgbWluLWhlaWdodDogMTAwZHZoOwogICAgICAgICAgICBvdmVyZmxvdy14OiBoaWRkZW47CiAgICAgICAgfQoKICAgICAgICAuY29udGFpbmVyIHsKICAgICAgICAgICAgcGVyc3BlY3RpdmU6IDE1MDBweDsKICAgICAgICAgICAgd2lkdGg6IDkwJTsKICAgICAgICAgICAgbWF4LXdpZHRoOiA0MDBweDsKICAgICAgICAgICAgaGVpZ2h0OiA2NTBweDsKICAgICAgICAgICAgY3Vyc29yOiBwb2ludGVyOwogICAgICAgIH0KCiAgICAgICAgLmNhcmQgewogICAgICAgICAgICB3aWR0aDogMTAwJTsKICAgICAgICAgICAgaGVpZ2h0OiAxMDAlOwogICAgICAgICAgICBwb3NpdGlvbjogcmVsYXRpdmU7CiAgICAgICAgICAgIHRyYW5zaXRpb246IHRyYW5zZm9ybSAxLjVzIGN1YmljLWJlemllcigwLjQsIDAsIDAuMiwgMSk7CiAgICAgICAgICAgIHRyYW5zZm9ybS1zdHlsZTogcHJlc2VydmUtM2Q7CiAgICAgICAgfQoKICAgICAgICAuY29udGFpbmVyLm9wZW4gLmNhcmQgewogICAgICAgICAgICB0cmFuc2Zvcm06IHJvdGF0ZVkoLTE4MGRlZyk7CiAgICAgICAgfQoKICAgICAgICAuY2FyZC1mcm9udCwgLmNhcmQtaW5zaWRlIHsKICAgICAgICAgICAgcG9zaXRpb246IGFic29sdXRlOwogICAgICAgICAgICB3aWR0aDogMTAwJTsKICAgICAgICAgICAgaGVpZ2h0OiAxMDAlOwogICAgICAgICAgICBiYWNrZmFjZS12aXNpYmlsaXR5OiBoaWRkZW47CiAgICAgICAgICAgIGJvcmRlci1yYWRpdXM6IDE1cHg7CiAgICAgICAgICAgIGJveC1zaGFkb3c6IDAgMTVweCAzNXB4IHJnYmEoMCwwLDAsMC4xKTsKICAgICAgICAgICAgb3ZlcmZsb3c6IGhpZGRlbjsKICAgICAgICAgICAgYm9yZGVyOiA4cHggc29saWQgI2ZmZjsKICAgICAgICB9CgogICAgICAgIC5jYXJkLWZyb250IHsKICAgICAgICAgICAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KHJnYmEoMjU1LDI1NSwyNTUsMC43KSwgcmdiYSgyNTUsMjU1LDI1NSwwLjcpKSwgCiAgICAgICAgICAgICAgICAgICAgICAgIHVybCgnaW1nL3dlZGRpbmctYmcuanBnJyk7CiAgICAgICAgICAgIGJhY2tncm91bmQtc2l6ZTogY292ZXI7CiAgICAgICAgICAgIGJhY2tncm91bmQtcG9zaXRpb246IGNlbnRlcjsKICAgICAgICAgICAgZGlzcGxheTogZmxleDsKICAgICAgICAgICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjsKICAgICAgICAgICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7CiAgICAgICAgICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7CiAgICAgICAgICAgIHRleHQtYWxpZ246IGNlbnRlcjsKICAgICAgICAgICAgei1pbmRleDogMjsKICAgICAgICB9CgogICAgICAgIC5jYXJkLWZyb250IGgxIHsKICAgICAgICAgICAgZm9udC1mYW1pbHk6ICdHcmVhdCBWaWJlcycsIGN1cnNpdmU7CiAgICAgICAgICAgIGZvbnQtc2l6ZTogM3JlbTsKICAgICAgICAgICAgY29sb3I6IHZhcigtLXByaW1hcnktY29sb3IpOwogICAgICAgICAgICBtYXJnaW4tYm90dG9tOiAyMHB4OwogICAgICAgIH0KCiAgICAgICAgLmd1ZXN0LWJveCB7CiAgICAgICAgICAgIGJhY2tncm91bmQ6IHJnYmEoMjU1LCAyNTUsIDI1NSwgMC45KTsKICAgICAgICAgICAgcGFkZGluZzogMjBweDsKICAgICAgICAgICAgYm9yZGVyLXJhZGl1czogMTBweDsKICAgICAgICAgICAgYm9yZGVyOiAxcHggZGFzaGVkIHZhcigtLXByaW1hcnktY29sb3IpOwogICAgICAgICAgICB3aWR0aDogODAlOwogICAgICAgIH0KCiAgICAgICAgLmd1ZXN0LWxhYmVsIHsKICAgICAgICAgICAgZm9udC1zaXplOiAwLjlyZW07CiAgICAgICAgICAgIHRleHQtdHJhbnNmb3JtOiB1cHBlcmNhc2U7CiAgICAgICAgICAgIGxldHRlci1zcGFjaW5nOiAycHg7CiAgICAgICAgICAgIG1hcmdpbi1ib3R0b206IDEwcHg7CiAgICAgICAgfQoKICAgICAgICAuZ3Vlc3QtbmFtZSB7CiAgICAgICAgICAgIGZvbnQtZmFtaWx5OiAnRGFuY2luZyBTY3JpcHQnLCBjdXJzaXZlOwogICAgICAgICAgICBmb250LXNpemU6IDEuNXJlbTsKICAgICAgICAgICAgY29sb3I6ICNiYzZjMjU7CiAgICAgICAgfQoKICAgICAgICAuY2xpY2staGludCB7CiAgICAgICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTsKICAgICAgICAgICAgYm90dG9tOiAzMHB4OwogICAgICAgICAgICBmb250LXNpemU6IDAuOHJlbTsKICAgICAgICAgICAgYW5pbWF0aW9uOiBib3VuY2UgMnMgaW5maW5pdGU7CiAgICAgICAgfQoKICAgICAgICAvKiBJbnNpZGUgUGFnZSAqLwogICAgICAgIC5jYXJkLWluc2lkZSB7CiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWNhcmQtYmcpOwogICAgICAgICAgICB0cmFuc2Zvcm06IHJvdGF0ZVkoMTgwZGVnKTsKICAgICAgICAgICAgZGlzcGxheTogZmxleDsKICAgICAgICAgICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjsKICAgICAgICAgICAgcGFkZGluZzogMjBweDsKICAgICAgICAgICAgdGV4dC1hbGlnbjogY2VudGVyOwogICAgICAgICAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjsKICAgICAgICAgICAgZ2FwOiAxMHB4OwogICAgICAgIH0KCiAgICAgICAgLndlZGRpbmctaGVhZGVyIHsKICAgICAgICAgICAgZm9udC1mYW1pbHk6ICdQbGF5ZmFpciBEaXNwbGF5Jywgc2VyaWY7CiAgICAgICAgICAgIGZvbnQtc3R5bGU6IGl0YWxpYzsKICAgICAgICAgICAgZm9udC1zaXplOiAxLjByZW07CiAgICAgICAgICAgIGNvbG9yOiB2YXIoLS1wcmltYXJ5LWNvbG9yKTsKICAgICAgICB9CgogICAgICAgIC5jb3VwbGUtbmFtZXMgewogICAgICAgICAgICBmb250LWZhbWlseTogJ0dyZWF0IFZpYmVzJywgY3Vyc2l2ZTsKICAgICAgICAgICAgZm9udC1zaXplOiAyLjJyZW07CiAgICAgICAgICAgIG1hcmdpbjogNXB4IDA7CiAgICAgICAgICAgIGNvbG9yOiAjMzMzOwogICAgICAgIH0KCiAgICAgICAgLmNvdXBsZS1uYW1lcyBzcGFuIHsKICAgICAgICAgICAgZGlzcGxheTogYmxvY2s7CiAgICAgICAgICAgIGZvbnQtc2l6ZTogMS4xcmVtOwogICAgICAgICAgICBmb250LWZhbWlseTogJ01vbnRzZXJyYXQnLCBzYW5zLXNlcmlmOwogICAgICAgICAgICBmb250LXN0eWxlOiBub3JtYWw7CiAgICAgICAgfQoKICAgICAgICAuZGV0YWlscyB7CiAgICAgICAgICAgIG1hcmdpbjogNXB4IDA7CiAgICAgICAgICAgIGJvcmRlci10b3A6IDFweCBzb2xpZCAjZWVlOwogICAgICAgICAgICBib3JkZXItYm90dG9tOiAxcHggc29saWQgI2VlZTsKICAgICAgICAgICAgcGFkZGluZzogMTBweCAwOwogICAgICAgIH0KCiAgICAgICAgLmRldGFpbHMgcCB7CiAgICAgICAgICAgIG1hcmdpbjogNXB4IDA7CiAgICAgICAgICAgIGZvbnQtc2l6ZTogMC44NXJlbTsKICAgICAgICAgICAgbGluZS1oZWlnaHQ6IDEuNDsKICAgICAgICB9CgogICAgICAgIC5kZXRhaWxzIHN0cm9uZyB7CiAgICAgICAgICAgIGRpc3BsYXk6IGJsb2NrOwogICAgICAgICAgICBjb2xvcjogdmFyKC0tcHJpbWFyeS1jb2xvcik7CiAgICAgICAgICAgIGZvbnQtc2l6ZTogMC45NXJlbTsKICAgICAgICAgICAgbWFyZ2luLWJvdHRvbTogMnB4OwogICAgICAgIH0KCiAgICAgICAgLnRoYW5rLXlvdSB7CiAgICAgICAgICAgIGZvbnQtZmFtaWx5OiAnRGFuY2luZyBTY3JpcHQnLCBjdXJzaXZlOwogICAgICAgICAgICBmb250LXNpemU6IDEuMnJlbTsKICAgICAgICAgICAgY29sb3I6IHZhcigtLXByaW1hcnktY29sb3IpOwogICAgICAgIH0KCiAgICAgICAgLnFyLWNvbnRhaW5lciB7CiAgICAgICAgICAgIGRpc3BsYXk6IG5vbmU7IC8qIE3hurdjIMSR4buLbmgg4bqpbiAqLwogICAgICAgICAgICBmbGV4LWRpcmVjdGlvbjogY29sdW1uOwogICAgICAgICAgICBhbGlnbi1pdGVtczogY2VudGVyOwogICAgICAgICAgICBtYXJnaW4tdG9wOiAycHg7CiAgICAgICAgfQoKICAgICAgICAucXItY29kZSB7CiAgICAgICAgICAgIHdpZHRoOiAyNHB4OwogICAgICAgICAgICBoZWlnaHQ6IDI0cHg7CiAgICAgICAgICAgIGJvcmRlcjogMXB4IHNvbGlkICNlZWU7CiAgICAgICAgICAgIHBhZGRpbmc6IDFweDsKICAgICAgICAgICAgYm9yZGVyLXJhZGl1czogMnB4OwogICAgICAgICAgICBiYWNrZ3JvdW5kOiAjZmZmOwogICAgICAgIH0KCiAgICAgICAgLnFyLWxhYmVsIHsKICAgICAgICAgICAgZm9udC1zaXplOiAwLjY1cmVtOwogICAgICAgICAgICBjb2xvcjogIzg4ODsKICAgICAgICAgICAgbWFyZ2luLXRvcDogM3B4OwogICAgICAgIH0KCiAgICAgICAgLmRlY29yLWltZyB7CiAgICAgICAgICAgIHdpZHRoOiA2MHB4OwogICAgICAgICAgICBtYXJnaW46IDAgYXV0bzsKICAgICAgICAgICAgb3BhY2l0eTogMC42OwogICAgICAgIH0KCiAgICAgICAgQGtleWZyYW1lcyBib3VuY2UgewogICAgICAgICAgICAwJSwgMjAlLCA1MCUsIDgwJSwgMTAwJSB7dHJhbnNmb3JtOiB0cmFuc2xhdGVZKDApO30KICAgICAgICAgICAgNDAlIHt0cmFuc2Zvcm06IHRyYW5zbGF0ZVkoLTEwcHgpO30KICAgICAgICAgICAgNjAlIHt0cmFuc2Zvcm06IHRyYW5zbGF0ZVkoLTVweCk7fQogICAgICAgIH0KCiAgICAgICAgQG1lZGlhIChtYXgtaGVpZ2h0OiA3MDBweCkgewogICAgICAgICAgICAuY29udGFpbmVyIHsgaGVpZ2h0OiA1ODBweDsgfQogICAgICAgICAgICAuY2FyZC1mcm9udCBoMSB7IGZvbnQtc2l6ZTogMi41cmVtOyB9CiAgICAgICAgICAgIC5jb3VwbGUtbmFtZXMgeyBmb250LXNpemU6IDJyZW07IH0KICAgICAgICB9CiAgICA8L3N0eWxlPgo8L2hlYWQ+Cjxib2R5PgoKICAgIDxkaXYgY2xhc3M9ImNvbnRhaW5lciIgaWQ9ImNhcmRDb250YWluZXIiPgogICAgICAgIDxkaXYgY2xhc3M9ImNhcmQiPgogICAgICAgICAgICA8IS0tIE3hurd0IG5nb8OgaSAtLT4KICAgICAgICAgICAgPGRpdiBjbGFzcz0iY2FyZC1mcm9udCI+CiAgICAgICAgICAgICAgICA8aDE+V2VkZGluZyBJbnZpdGF0aW9uPC9oMT4KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9Imd1ZXN0LWJveCI+CiAgICAgICAgICAgICAgICAgICAgPHAgY2xhc3M9Imd1ZXN0LWxhYmVsIj5UaMOibiBt4budaTwvcD4KICAgICAgICAgICAgICAgICAgICA8cCBjbGFzcz0iZ3Vlc3QtbmFtZSIgaWQ9Imd1ZXN0TmFtZURpc3BsYXkiPkLhuqFuIHbDoCBHaWEgxJDDrG5oPC9wPgogICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICA8cCBjbGFzcz0iY2xpY2staGludCI+Q2jhuqFtIMSR4buDIG3hu58gdGhp4buHcDwvcD4KICAgICAgICAgICAgPC9kaXY+CgogICAgICAgICAgICA8IS0tIE3hurd0IHRyb25nIC0tPgogICAgICAgICAgICA8ZGl2IGNsYXNzPSJjYXJkLWluc2lkZSI+CiAgICAgICAgICAgICAgICA8cCBjbGFzcz0id2VkZGluZy1oZWFkZXIiPlRyw6JuIHRy4buNbmcga8OtbmggbeG7nWkgdOG7m2kgZOG7sSBs4buFIHRow6BuaCBow7RuIGPhu6dhPC9wPgogICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJjb3VwbGUtbmFtZXMiPgogICAgICAgICAgICAgICAgICAgIFbEg24gTeG6oW5oCiAgICAgICAgICAgICAgICAgICAgPHNwYW4+Jjwvc3Bhbj4KICAgICAgICAgICAgICAgICAgICBIdXnhu4FuIFRyYW5nCiAgICAgICAgICAgICAgICA8L2Rpdj4KCiAgICAgICAgICAgICAgICA8aW1nIHNyYz0iaW1nL3JpbmdzLWljb24ucG5nIiBjbGFzcz0iZGVjb3ItaW1nIiBhbHQ9IndlZGRpbmctcmluZ3MiPgoKICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImRldGFpbHMiPgogICAgICAgICAgICAgICAgICAgIDxwPgogICAgICAgICAgICAgICAgICAgICAgICA8c3Ryb25nPlRo4budaSBnaWFuPC9zdHJvbmc+CiAgICAgICAgICAgICAgICAgICAgICAgIDExOjAwIEFNIHwgQ2jhu6cgbmjhuq10LCAyMC8xMi8yMDI2CiAgICAgICAgICAgICAgICAgICAgPC9wPgogICAgICAgICAgICAgICAgICAgIDxwPgogICAgICAgICAgICAgICAgICAgICAgICA8c3Ryb25nPsSQ4buLYSDEkWnhu4NtPC9zdHJvbmc+CiAgICAgICAgICAgICAgICAgICAgICAgIFRydW5nIHTDom0gSOG7mWkgbmdo4buLIFRp4buHYyBjxrDhu5tpIEFCQzxicj4KICAgICAgICAgICAgICAgICAgICAgICAgMTIzIMSQxrDhu51uZyBMw6FuZywgxJDhu5FuZyDEkGEsIEjDoCBO4buZaQogICAgICAgICAgICAgICAgICAgIDwvcD4KICAgICAgICAgICAgICAgIDwvZGl2PgoKICAgICAgICAgICAgICAgIDxwIGNsYXNzPSJ0aGFuay15b3UiPlPhu7EgaGnhu4duIGRp4buHbiBj4bunYSBi4bqhbiBsw6Agbmnhu4FtIHZpbmggaOG6oW5oIGPhu6dhIGNow7puZyBtw6xuaCE8L3A+CgogICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0icXItY29udGFpbmVyIiBpZD0icXJDb250YWluZXIiPgogICAgICAgICAgICAgICAgICAgIDxpbWcgc3JjPSJpbWcvcXIuanBnIiBjbGFzcz0icXItY29kZSIgYWx0PSJRUiBDb2RlIj4KICAgICAgICAgICAgICAgICAgICA8IS0tIDxwIGNsYXNzPSJxci1sYWJlbCI+TeG7q25nIGPGsOG7m2kgcXVhIG3DoyBRUjwvcD4gLS0+CiAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgPC9kaXY+CiAgICA8L2Rpdj4KCiAgICA8c2NyaXB0PgogICAgICAgIGZ1bmN0aW9uIGluaXRJbnZpdGF0aW9uKCkgewogICAgICAgICAgICBjb25zdCB1cmxQYXJhbXMgPSBuZXcgVVJMU2VhcmNoUGFyYW1zKHdpbmRvdy5sb2NhdGlvbi5zZWFyY2gpOwoKICAgICAgICAgICAgLy8gSMOgbSBs4bqleSB0aGFtIHPhu5EgdOG7qyBVUkwgdsOgIGdp4bqjaSBtw6MgKMSR4buDIHRyw6FuaCBs4buXaSBoaeG7g24gdGjhu4sgY2h14buXaSAlRTEuLi4pCiAgICAgICAgICAgIGZ1bmN0aW9uIGdldFBhcmFtKG5hbWUpIHsKICAgICAgICAgICAgICAgIGNvbnN0IHZhbCA9IHVybFBhcmFtcy5nZXQobmFtZSk7CiAgICAgICAgICAgICAgICBpZiAoIXZhbCkgcmV0dXJuIG51bGw7CiAgICAgICAgICAgICAgICB0cnkgewogICAgICAgICAgICAgICAgICAgIHJldHVybiBkZWNvZGVVUklDb21wb25lbnQodmFsKTsKICAgICAgICAgICAgICAgIH0gY2F0Y2ggKGUpIHsKICAgICAgICAgICAgICAgICAgICByZXR1cm4gdmFsOwogICAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CgogICAgICAgICAgICBsZXQgZ3Vlc3QgPSBnZXRQYXJhbSgndG8nKTsKICAgICAgICAgICAgbGV0IHNob3dRciA9IGdldFBhcmFtKCdxcicpOwoKICAgICAgICAgICAgLy8gSOG7lyB0cuG7oyBtw6MgaMOzYSBQYXlsb2FkIChnaeG6pXUgdGjDtG5nIHRpbiB0csOqbiBVUkwgYuG6sW5nIHRoYW0gc+G7kSA/cD0uLi4pCiAgICAgICAgICAgIGNvbnN0IHBheWxvYWQgPSB1cmxQYXJhbXMuZ2V0KCdwJyk7CiAgICAgICAgICAgIGlmIChwYXlsb2FkKSB7CiAgICAgICAgICAgICAgICB0cnkgewogICAgICAgICAgICAgICAgICAgIC8vIEdp4bqjaSBtw6MgQmFzZTY0ICho4buXIHRy4bujIGPDoWMga8O9IHThu7EgVW5pY29kZS9UaeG6v25nIFZp4buHdCkKICAgICAgICAgICAgICAgICAgICAvLyBiNjQgLT4gYXRvYiAtPiBlc2NhcGUgLT4gZGVjb2RlVVJJQ29tcG9uZW50CiAgICAgICAgICAgICAgICAgICAgY29uc3QgZGVjb2RlZERhdGEgPSBkZWNvZGVVUklDb21wb25lbnQoZXNjYXBlKHdpbmRvdy5hdG9iKHBheWxvYWQpKSk7CiAgICAgICAgICAgICAgICAgICAgY29uc3QgcGFyYW1zID0gbmV3IFVSTFNlYXJjaFBhcmFtcyhkZWNvZGVkRGF0YSk7CiAgICAgICAgICAgICAgICAgICAgaWYgKHBhcmFtcy5nZXQoJ3RvJykpIGd1ZXN0ID0gcGFyYW1zLmdldCgndG8nKTsKICAgICAgICAgICAgICAgICAgICBpZiAocGFyYW1zLmdldCgncXInKSkgc2hvd1FyID0gcGFyYW1zLmdldCgncXInKTsKICAgICAgICAgICAgICAgIH0gY2F0Y2ggKGUpIHsKICAgICAgICAgICAgICAgICAgICBjb25zb2xlLmVycm9yKCJMaW5rIGLDrSBt4bqtdCBraMO0bmcgaOG7o3AgbOG7hyBob+G6t2MgYuG7iyBs4buXaSDEkeG7i25oIGThuqFuZy4iKTsKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgfQoKICAgICAgICAgICAgLy8gMS4gSGnhu4NuIHRo4buLIHTDqm4ga2jDoWNoIG3hu51pCiAgICAgICAgICAgIGlmIChndWVzdCkgewogICAgICAgICAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2d1ZXN0TmFtZURpc3BsYXknKS50ZXh0Q29udGVudCA9IGd1ZXN0OwogICAgICAgICAgICB9CgogICAgICAgICAgICAvLyAyLiBIaeG7g24gdGjhu4sgbcOjIFFSCiAgICAgICAgICAgIGlmIChzaG93UXIgPT09ICd0cnVlJykgewogICAgICAgICAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3FyQ29udGFpbmVyJykuc3R5bGUuZGlzcGxheSA9ICdmbGV4JzsKICAgICAgICAgICAgfQogICAgICAgIH0KCiAgICAgICAgLy8gSGnhu4d1IOG7qW5nIG3hu58gdGhp4buHcAogICAgICAgIGNvbnN0IGNvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdjYXJkQ29udGFpbmVyJyk7CiAgICAgICAgY29udGFpbmVyLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJywgKCkgPT4gewogICAgICAgICAgICBjb250YWluZXIuY2xhc3NMaXN0LnRvZ2dsZSgnb3BlbicpOwogICAgICAgIH0pOwoKICAgICAgICB3aW5kb3cub25sb2FkID0gaW5pdEludml0YXRpb247CiAgICA8L3NjcmlwdD4KPC9ib2R5Pgo8L2h0bWw+Cg=='), c => c.charCodeAt(0))));</script>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Wedding Invitation - Autumn Sleeve</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --autumn-red: #8d2400;
+            --autumn-orange: #e64a19;
+            --autumn-bg: #fffbf0;
+            --card-white: #ffffff;
+            --sleeve-bg: #fdf2f0;
+            --card-radius: 40px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+        body, html { width: 100%; height: 100%; overflow: hidden; font-family: 'Montserrat', sans-serif; background-color: var(--autumn-bg); }
+
+        .page-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(255,251,240,0.85), rgba(255,251,240,0.85)), url('img/wedding-bg.jpg');
+            background-size: cover; background-position: center; z-index: -1;
+        }
+
+        .slider-container { 
+            width: 100%; height: 100vh; overflow-y: scroll; overflow-x: hidden;
+            scroll-snap-type: y mandatory; scroll-behavior: smooth; 
+            scrollbar-width: none; position: relative; z-index: 10;
+        }
+        .slider-container::-webkit-scrollbar { display: none; }
+
+        .slide { 
+            width: 100%; height: 100vh; 
+            scroll-snap-align: start; scroll-snap-stop: always;
+            display: flex; justify-content: center; align-items: center;
+            position: relative;
+        }
+
+        /* NHÂN THIỆP A - FIXED 
+           Luôn neo ở top: 50% để căn giữa tuyệt đối
+        */
+        .fixed-card-a {
+            position: fixed;
+            top: 50%; 
+            left: 0; right: 0; margin: 0 auto;
+            //transform: translateY(calc(-50% - 100px)); /* Mặc định nhô lên ở Slide 1 */
+            transform: translateY(-75% - 100px); /* Mặc định nhô lên ở Slide 1 */
+            width: 90%; max-width: 400px;
+            height: 650px;
+            background: var(--card-white);
+            border-radius: var(--card-radius);
+            border: 8px solid #fff;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.1);
+            z-index: 50;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 40px 20px;
+            pointer-events: none;
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        .fixed-card-a::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url('img/wedding-bg.jpg');
+            background-size: cover; background-position: center;
+            border-radius: calc(var(--card-radius) - 8px);
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+            z-index: -1;
+        }
+
+        .fixed-card-a.show-bg::before { opacity: 1; }
+
+        /* BAO THIỆP - FIXED */
+        .fixed-sleeve {
+            position: fixed;
+            top: 50%; 
+            left: 0; right: 0; margin: 0 auto;
+            //transform: translateY(-50% + 100px);
+			transform: translateY(-100%);
+            width: 100%; max-width: 460px;
+            height: 380px;
+            background: var(--sleeve-bg);
+            z-index: 100;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+            pointer-events: none;
+        }
+
+        .sleeve-info {
+            background: white; padding: 25px 40px;
+            border: 1px dashed var(--autumn-orange);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            text-align: center; border-radius: 25px;
+            pointer-events: auto;
+        }
+
+        .card-a-text {
+            opacity: 0; width: 100%;
+            transition: opacity 0.2s ease-in-out;
+        }
+        .card-a-text.show-text { opacity: 1; }
+
+        h1, h2 { font-family: 'Dancing Script', cursive; color: var(--autumn-red); }
+        .romantic-title { font-size: 3.4rem; margin: 15px 0; line-height: 1.2; }
+        .info-divider { width: 80px; height: 1px; background: var(--autumn-orange); margin: 25px auto; opacity: 0.2; }
+        .details-text { font-size: 1rem; line-height: 1.8; color: #444; }
+
+        /* Nhân thiệp B (Slide 3) */
+        .card-b {
+            position: relative;
+            width: 90%; max-width: 400px;
+            height: 650px;
+            background: var(--card-white);
+            border-radius: var(--card-radius);
+            border: 8px solid #fff;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.1);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 40px 20px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: scale(0.95) translateY(20px);
+            transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+            z-index: 1;
+        }
+
+        .card-b::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url('img/wedding-bg.jpg');
+            background-size: cover; background-position: center;
+            border-radius: calc(var(--card-radius) - 8px);
+            z-index: -1;
+        }
+
+        #slide3.active .card-b {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        .leaf-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 150; overflow: hidden; }
+        .leaf { position: absolute; top: -50px; }
+        @keyframes leaf-fall {
+            0% { transform: translateY(0) rotate(0deg) translateX(0); opacity: 0; }
+            10% { opacity: 0.8; }
+            100% { transform: translateY(110vh) rotate(720deg) translateX(100px); opacity: 0; }
+        }
+
+        .scroll-hint { 
+            position: absolute; bottom: 25px; left: 0; width: 100%;
+            text-align: center; font-size: 0.7rem; 
+            color: var(--autumn-orange); text-transform: uppercase; 
+            letter-spacing: 4px; animation: bounce 2s infinite; 
+            z-index: 110; font-weight: 600;
+        }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        .fixed-card-a.bouncing {
+            animation: card-bounce 2s infinite;
+        }
+        @keyframes card-bounce { 
+            0%, 100% { transform: translateY(calc(-75% - 100px)); } 
+            50% { transform: translateY(calc(-75% - 120px)); } 
+        }
+
+        .qr-card-wrap {
+            margin-top: 25px; padding: 10px; background: #fff; 
+            border-radius: 20px; border: 1px solid #f0f0f0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        /* KHI MÀN HÌNH QUÁ NGẮN -> Thu nhỏ toàn bộ thiệp theo tỷ lệ (giữ nguyên bố cục) */
+        @media (max-height: 700px) {
+            .fixed-card-a, .card-b, .fixed-sleeve { scale: 0.9; }
+        }
+
+        @media (max-height: 620px) {
+            .fixed-card-a, .card-b, .fixed-sleeve { scale: 0.8; }
+        }
+
+        @media (max-height: 550px) {
+            .fixed-card-a, .card-b, .fixed-sleeve { scale: 0.7; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-bg"></div>
+    <div class="leaf-container" id="leafContainer"></div>
+
+    <div class="fixed-sleeve" id="fixedSleeve">
+        <div class="sleeve-info">
+            <span id="invitationGreeting" style="font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: #aaa;"></span>
+            <h2 id="guestDisplay" style="font-size: 2rem; margin-top: 10px; color: var(--autumn-red);"></h2>
+            <p id="sleeveHint" style="font-size: 0.6rem; color: #ccc; margin-top: 12px; letter-spacing: 1px;"></p>
+        </div>
+    </div>
+
+    <div class="fixed-card-a bouncing" id="cardA">
+        <div class="card-a-text" id="cardAText">
+            <span id="cardATopText" style="font-size: 0.8rem; letter-spacing: 4px; color: #ccc; text-transform: uppercase;"></span>
+            <h1 class="romantic-title" id="coupleNamesA"></h1>
+            <div class="info-divider"></div>
+            <div class="details-text">
+                <p id="eventTitle" style="color: var(--autumn-orange); font-weight: 600; letter-spacing: 1px;"></p>
+                <p id="eventTime" style="margin-top: 10px;"></p>
+                <p id="eventDate" style="font-size: 1.5rem; font-weight: 600; color: #333;"></p>
+                <div style="height: 30px;"></div>
+                <p id="locationTitle" style="color: var(--autumn-orange); font-weight: 600; letter-spacing: 1px;"></p>
+                <p id="locationName"></p>
+                <p id="locationAddress" style="font-size: 0.85rem; color: #888;"></p>
+            </div>
+            <div class="info-divider"></div>
+            <img src="img/rings-icon.png" style="width: 50px; opacity: 0.5;" alt="rings">
+        </div>
+    </div>
+
+    <div class="slider-container" id="slider">
+        <section class="slide" id="slide1">
+            <div class="scroll-hint" id="scrollHint"></div>
+        </section>
+        <section class="slide" id="slide2"></section>
+        <section class="slide" id="slide3">
+            <div class="card-b">
+                <h2 id="thankYouTitle" style="font-size: 3.2rem; margin-bottom: 20px;"></h2>
+                <p id="thankYouMessage" style="font-size: 0.95rem; line-height: 1.8; color: #666; padding: 0 10px;"></p>
+                <div id="qrContainer"></div>
+                <p id="coupleNamesB" style="margin-top: 45px; font-family: 'Dancing Script', cursive; color: var(--autumn-red); font-size: 2.2rem;"></p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const CONFIG = {
+            groomName: "Văn Mạnh",
+            brideName: "Huyền Trang",
+            eventTitle: "LỄ THÀNH HÔN",
+            eventTime: "11:00 AM | Chủ nhật",
+            eventDate: "20 . 12 . 2026",
+            locationTitle: "ĐỊA ĐIỂM",
+            locationName: "Trung tâm Hội nghị Tiệc cưới ABC",
+            locationAddress: "123 Đường Láng, Đống Đa, Hà Nội",
+            thankYouTitle: "Thank You!",
+            thankYouMessage: "Sự hiện diện của bạn là niềm vinh hạnh lớn nhất đối với gia đình chúng mình.",
+            defaultGuest: "Bạn và Gia Đình",
+            invitationGreeting: "Thân mời",
+            sleeveHint: "VUỐT LÊN ĐỂ RÚT THIỆP",
+            cardATopText: "Wedding Invitation",
+            scrollHint: "RÚT THIỆP ↓",
+            qrText: "MỪNG CƯỚI ONLINE"
+        };
+
+        function applyConfig() {
+            document.getElementById('coupleNamesA').innerHTML = `${CONFIG.groomName}<br><span style="font-size: 1.6rem; display: inline-block; margin: 5px 0;">&</span><br>${CONFIG.brideName}`;
+            document.getElementById('eventTitle').textContent = CONFIG.eventTitle;
+            document.getElementById('eventTime').textContent = CONFIG.eventTime;
+            document.getElementById('eventDate').textContent = CONFIG.eventDate;
+            document.getElementById('locationTitle').textContent = CONFIG.locationTitle;
+            document.getElementById('locationName').textContent = CONFIG.locationName;
+            document.getElementById('locationAddress').textContent = CONFIG.locationAddress;
+            document.getElementById('thankYouTitle').textContent = CONFIG.thankYouTitle;
+            document.getElementById('thankYouMessage').textContent = CONFIG.thankYouMessage;
+            document.getElementById('coupleNamesB').textContent = `${CONFIG.groomName} & ${CONFIG.brideName}`;
+            document.getElementById('invitationGreeting').textContent = CONFIG.invitationGreeting;
+            document.getElementById('sleeveHint').textContent = CONFIG.sleeveHint;
+            document.getElementById('cardATopText').textContent = CONFIG.cardATopText;
+            document.getElementById('scrollHint').textContent = CONFIG.scrollHint;
+        }
+
+        const state = { guest: CONFIG.defaultGuest, showQr: false };
+
+        function initParams() {
+            applyConfig();
+            const urlParams = new URLSearchParams(window.location.search);
+            const getParam = (name) => {
+                const val = urlParams.get(name);
+                if (!val) return null;
+                try { return decodeURIComponent(val); } catch (e) { return val; }
+            };
+
+            let guest = getParam('to');
+            let showQr = getParam('qr');
+            const payload = urlParams.get('p');
+
+            if (payload) {
+                try {
+                    const decodedData = decodeURIComponent(escape(window.atob(payload)));
+                    const params = new URLSearchParams(decodedData);
+                    if (params.get('to')) guest = params.get('to');
+                    if (params.get('qr')) showQr = params.get('qr');
+                } catch (e) { console.error("Payload error"); }
+            }
+
+            if (guest) state.guest = guest;
+            document.getElementById('guestDisplay').textContent = state.guest;
+            state.showQr = (showQr === 'true');
+            
+            const qrContainer = document.getElementById('qrContainer');
+            if (state.showQr) {
+                qrContainer.innerHTML = `
+                    <div class="qr-card-wrap">
+                        <img src="img/qr.jpg" style="width: 140px; height: 140px; border-radius: 12px;" alt="QR">
+                        <p style="font-size: 0.7rem; color: #bbb; margin-top: 8px;">${CONFIG.qrText}</p>
+                    </div>
+                `;
+            } else {
+                qrContainer.innerHTML = `<div style="font-size: 4rem; opacity: 0.1; margin: 30px 0;">💍</div>`;
+            }
+        }
+
+        let leafInterval = null;
+        function spawnLeaf() {
+            const container = document.getElementById('leafContainer');
+            const leaf = document.createElement('div');
+            leaf.className = 'leaf';
+            leaf.innerHTML = `<svg viewBox="0 0 512 512" fill="currentColor" width="100%" height="100%"><path d="M495.9 281.7l-47.5-17.6c-4.4-1.6-9.5-.1-12.2 3.8l-15.1 22.1c-2.4 3.5-6.8 4.7-10.5 2.6L324.4 240c-1.8-.9-3.9-1-5.8-.3l-48 17.8c-4.4 1.6-9.5.1-12.2-3.8l-37.3-54.6c-2.4-3.5-2.2-8.3.4-11.5l146.6-180.2c2.9-3.6 2.6-8.8-.7-12L348.1 4.3c-2.5-2.4-6.3-2.9-9.3-1.2L167.3 103.5c-3.1 1.7-6.9 1.4-9.7-.9l-19.1-15.7c-3.1-2.6-7.7-2.4-10.6.4L5.3 216c-3 3-3.1 7.8-.3 10.9l19.1 21.2c2.6 2.9 3 7.1.9 10.4L1.7 311c-2 3.2-1.7 7.4.8 10.3l37.3 43.1c2.4 2.8 6.5 3.5 9.7 1.8l20.4-11c3.2-1.7 7.2-1.2 9.9 1.3l17.7 16.3c2.7 2.5 6.9 2.5 9.6 0l17.7-16.3c2.7-2.5 6.7-3 9.9-1.3l20.4 11c3.2 1.7 7.3 1 9.7-1.8l37.3-43.1c2.5-2.9 2.8-7.1.8-10.3l-23.3-52.5c-2.1-3.3-1.7-7.5.9-10.4l19.1-21.2c2.8-3.1 2.7-7.9-.3-10.9l-122.6-128.8c-2.9-3.1-2.9-7.9 0-11l146.6 180.2c2.6 3.2 2.8 8 .4 11.5l-37.3 54.6c-2.7 3.9-7.8 5.4-12.2 3.8l-48-17.8c-1.9-.7-4-.6-5.8.3L32.4 345c-3.7 2.1-8.1.9-10.5-2.6l-15.1-22.1c-2.7-3.9-7.8-5.4-12.2-3.8l-47.5 17.6c-4.4 1.6-6.2 6.8-4 10.8l56.5 104.1c2.2 4.1 7.4 5.3 11.2 2.6l24.4-17.5c3.2-2.3 7.6-1.8 10.2 1.1l111 123.4c2.6 2.9 7.1 2.9 9.7 0l111-123.4c2.6-2.9 7-3.4 10.2-1.1l24.4 17.5c3.8 2.7 9 1.5 11.2-2.6l56.5-104.1c2.2-4 0-9.2-4.4-10.8z"/></svg>`;
+            leaf.style.left = Math.random() * 100 + '%';
+            const size = (Math.random() * 35 + 20);
+            leaf.style.width = size + 'px';
+            leaf.style.color = ['#e64a19', '#bf360c', '#ff6f00', '#d84315'][Math.floor(Math.random() * 4)];
+            const duration = Math.random() * 4 + 6;
+            leaf.style.animation = `leaf-fall ${duration}s linear forwards`;
+            container.appendChild(leaf);
+            setTimeout(() => { if (leaf.parentNode) leaf.remove(); }, duration * 1000);
+        }
+
+        function manageLeaves(scrollTop, vh) {
+            if (scrollTop > vh * 0.1) {
+                if (!leafInterval) {
+                    for (let i = 0; i < 5; i++) setTimeout(spawnLeaf, Math.random() * 500);
+                    leafInterval = setInterval(spawnLeaf, 300);
+                }
+            } else {
+                if (leafInterval) { clearInterval(leafInterval); leafInterval = null; }
+            }
+        }
+
+        const slider = document.getElementById('slider');
+        const sleeve = document.getElementById('fixedSleeve');
+        const cardA = document.getElementById('cardA');
+        const cardAText = document.getElementById('cardAText');
+        const slides = document.querySelectorAll('.slide');
+
+        slider.addEventListener('scroll', () => {
+            const scrollTop = slider.scrollTop;
+            const vh = window.innerHeight;
+            const index = Math.round(scrollTop / vh);
+
+            if (scrollTop === 0) cardA.classList.add('bouncing');
+            else cardA.classList.remove('bouncing');
+
+            slides.forEach((s, i) => {
+                if (i === index) s.classList.add('active');
+                else s.classList.remove('active');
+            });
+
+            if (scrollTop <= vh) {
+                const ratio = scrollTop / vh;
+                // Sleeve trượt lên
+                sleeve.style.transform = `translateY(calc(-100% - ${scrollTop}px))`;
+                
+                // Card A trượt từ vị trí nhô lên (-100px so với tâm) về đúng tâm (0px)
+                const currentOffset = -100 * (1 - ratio);
+                //const currentOffset = -0 * (1 - ratio);
+                cardA.style.transform = `translateY(calc(-75% + ${currentOffset}px))`;
+                
+                if (ratio > 0.6) {
+                    cardAText.classList.add('show-text');
+                    cardA.classList.add('show-bg');
+                } else {
+                    cardAText.classList.remove('show-text');
+                    cardA.classList.remove('show-bg');
+                }
+                cardA.style.opacity = 1;
+            } else {
+                const overScroll = scrollTop - vh;
+                //const overScroll = 0;
+                // Trượt lên cùng Slide 3
+                cardA.style.transform = `translateY(calc(-75% - ${overScroll}px))`;
+                
+                if (index >= 2) cardA.style.opacity = 0;
+                else cardA.style.opacity = 1;
+
+                cardAText.classList.add('show-text');
+                cardA.classList.add('show-bg');
+            }
+
+            manageLeaves(scrollTop, vh);
+        });
+
+        window.onload = initParams;
+    </script>
+</body>
+</html>
