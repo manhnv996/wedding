@@ -365,6 +365,7 @@
         const sleeve = document.getElementById('fixedSleeve');
         const cardA = document.getElementById('cardA');
         const cardAText = document.getElementById('cardAText');
+        const scrollHint = document.getElementById('scrollHint');
         const slides = document.querySelectorAll('.slide');
 
         slider.addEventListener('scroll', () => {
@@ -374,6 +375,14 @@
 
             if (scrollTop === 0) cardA.classList.add('bouncing');
             else cardA.classList.remove('bouncing');
+
+            // Hiệu ứng mờ dần cho text "Rút Thiệp"
+            if (scrollTop <= vh) {
+                const hintOpacity = Math.max(0, 1 - (scrollTop / (vh * 0.3)));
+                scrollHint.style.opacity = hintOpacity;
+            } else {
+                scrollHint.style.opacity = 0;
+            }
 
             slides.forEach((s, i) => {
                 if (i === index) s.classList.add('active');
