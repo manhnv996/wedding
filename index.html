@@ -220,7 +220,7 @@
 
     <div class="fixed-sleeve-container">
         <div class="fixed-sleeve" id="fixedSleeve">
-            <div class="sleeve-info">
+            <div class="sleeve-info" id="sleeveInfo">
                 <span id="invitationGreeting" style="font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: #aaa;"></span>
                 <h2 id="guestDisplay" style="font-size: 2rem; margin-top: 10px; color: var(--autumn-red);"></h2>
                 <p id="sleeveHint" style="font-size: 0.6rem; color: #ccc; margin-top: 12px; letter-spacing: 1px;"></p>
@@ -363,6 +363,7 @@
 
         const slider = document.getElementById('slider');
         const sleeve = document.getElementById('fixedSleeve');
+        const sleeveInfo = document.getElementById('sleeveInfo');
         const cardA = document.getElementById('cardA');
         const cardAText = document.getElementById('cardAText');
         const scrollHint = document.getElementById('scrollHint');
@@ -376,12 +377,15 @@
             if (scrollTop === 0) cardA.classList.add('bouncing');
             else cardA.classList.remove('bouncing');
 
-            // Hiệu ứng mờ dần cho text "Rút Thiệp"
+            // Hiệu ứng mờ dần riêng biệt
             if (scrollTop <= vh) {
-                const hintOpacity = Math.max(0, 1 - (scrollTop / (vh * 0.1)));
-                scrollHint.style.opacity = hintOpacity;
+                // Text "Rút Thiệp" mờ rất nhanh (10%)
+                scrollHint.style.opacity = Math.max(0, 1 - (scrollTop / (vh * 0.1)));
+                // Sleeve Info mờ chậm hơn (40%)
+                sleeveInfo.style.opacity = Math.max(0, 1 - (scrollTop / (vh * 0.8)));
             } else {
                 scrollHint.style.opacity = 0;
+                sleeveInfo.style.opacity = 0;
             }
 
             slides.forEach((s, i) => {
