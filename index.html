@@ -258,7 +258,7 @@
             invitationGreeting: "Thân mời",
             sleeveHint: "VUỐT LÊN ĐỂ RÚT THIỆP",
             cardATopText: "Wedding Invitation",
-            scrollHint: "RÚT THIỆP ↓",
+            scrollHint: "RÚT THIỆP ↑",
             qrText: "MỪNG CƯỚI ONLINE",
             
             // Danh sách ảnh lá phong trong folder img/
@@ -378,7 +378,7 @@
 
             // Hiệu ứng mờ dần cho text "Rút Thiệp"
             if (scrollTop <= vh) {
-                const hintOpacity = Math.max(0, 1 - (scrollTop / (vh * 0.2)));
+                const hintOpacity = Math.max(0, 1 - (scrollTop / (vh * 0.1)));
                 scrollHint.style.opacity = hintOpacity;
             } else {
                 scrollHint.style.opacity = 0;
