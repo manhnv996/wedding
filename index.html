@@ -378,7 +378,7 @@
 
             // Hiệu ứng mờ dần cho text "Rút Thiệp"
             if (scrollTop <= vh) {
-                const hintOpacity = Math.max(0, 1 - (scrollTop / (vh * 0.3)));
+                const hintOpacity = Math.max(0, 1 - (scrollTop / (vh * 0.2)));
                 scrollHint.style.opacity = hintOpacity;
             } else {
                 scrollHint.style.opacity = 0;
