@@ -52,7 +52,7 @@
         .fixed-sleeve-back {
             position: relative;
             margin-top: -50px;
-            width: 100%; max-width: 480px;
+            width: 100%; max-width: 520px;
             height: 380px;
             background: #f0dad8;
             pointer-events: none;
@@ -103,7 +103,7 @@
         .fixed-sleeve {
             position: relative;
             margin-top: -50px;
-            width: 100%; max-width: 480px;
+            width: 100%; max-width: 520px;
             height: 380px;
             background: var(--sleeve-bg);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -132,24 +132,26 @@
         .romantic-title { font-family: 'Great Vibes', cursive; font-size: 2.8rem; margin: 30px 5px; line-height: 1.0; font-weight: normal; }
         .info-divider { width: 80px; height: 1px; background: var(--autumn-orange); margin: 25px auto; opacity: 0.2; }
         .details-text { font-size: 1rem; line-height: 1.8; color: #444; }
-
-        /* Nhân thiệp B (Slide 3) */
-        .card-b {
-            position: relative;
-            width: 90%; max-width: 400px;
-            height: 650px;
-            background: var(--card-white);
-            border-radius: var(--card-radius);
-            border: 8px solid #fff;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15), 0 5px 15px rgba(0,0,0,0.05);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            text-align: center; padding: 40px 20px;
-            margin: 0 auto;
-            opacity: 0;
-            transform: scale(0.95) translateY(20px);
-            transition: opacity 0.2s ease-out, transform 0.2s ease-out;
-            z-index: 1;
-        }
+		
+		/* Nhân thiệp B (Slide 3) */
+		.card-b {
+			position: relative;
+			width: 90%; max-width: 400px;
+			height: 650px;
+			background: var(--card-white);
+			border-radius: var(--card-radius);
+			border: 8px solid #fff;
+			/* Shadow sâu và mềm mại giống cardA */
+			box-shadow: 0 20px 50px rgba(0,0,0,0.15), 0 5px 15px rgba(0,0,0,0.05);
+			display: flex; flex-direction: column; align-items: center; justify-content: center;
+			text-align: center; padding: 40px 20px;
+			margin: 0 auto;
+			opacity: 0;
+			transform: scale(0.95) translateY(20px);
+			transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+			/* Đồng bộ z-index tầng 2 */
+			z-index: 50;
+		}
 
         .card-b::before {
             content: '';
@@ -420,10 +422,10 @@
                 sleeve.style.transform = `translateY(${offset}px)`;
                 sleeveBack.style.transform = `translateY(${offset}px)`;
 
-                // HIỆN LẠI BAO THIỆP KHI QUAY VỀ SLIDE 1
-                const sleeveFade = Math.min(1, Math.max(0, (1 - ratio) / 0.3));
-                sleeve.style.opacity = sleeveFade;
-                sleeveBack.style.opacity = sleeveFade;
+                // // HIỆN LẠI BAO THIỆP KHI QUAY VỀ SLIDE 1
+                // const sleeveFade = Math.min(1, Math.max(0, (1 - ratio) / 0.3));
+                // sleeve.style.opacity = sleeveFade;
+                // sleeveBack.style.opacity = sleeveFade;
                 
                 // Trượt nhân thiệp
                 const currentOffset = -100 * (1 - ratio);
@@ -440,9 +442,9 @@
                 if (index >= 2) cardA.style.opacity = 0;
                 else cardA.style.opacity = 1;
                 
-                // Bao thiệp ẩn hoàn toàn khi qua Slide 1
-                sleeve.style.opacity = 0;
-                sleeveBack.style.opacity = 0;
+                // // Bao thiệp ẩn hoàn toàn khi qua Slide 1
+                // sleeve.style.opacity = 0;
+                // sleeveBack.style.opacity = 0;
                 
                 cardAText.style.opacity = 1;
                 cardA.style.setProperty('--card-bg-opacity', 1);
