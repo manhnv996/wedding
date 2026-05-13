@@ -51,13 +51,16 @@
         /* 1. BAO THIỆP DƯỚI (MẶT SAU) */
         .fixed-sleeve-back {
             position: relative;
-            margin-top: -50px; /* Khớp hoàn toàn với bao trên */
+            margin-top: -50px;
             width: 100%; max-width: 480px;
-            height: 380px; /* Khớp hoàn toàn chiều cao bao trên */
+            height: 380px;
             background: #f0dad8;
             pointer-events: none;
-            /* Shadow cho cả khối (bao gồm cả phần chóp ở ::after) */
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.08));
+            /* Tối ưu mobile */
+            will-change: transform;
+            backface-visibility: hidden;
+            transform: translateZ(0);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
 
         /* Tạo chóp tam giác ở đáy bao dưới */
