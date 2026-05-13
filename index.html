@@ -51,13 +51,22 @@
         /* 1. BAO THIỆP DƯỚI (MẶT SAU) */
         .fixed-sleeve-back {
             position: relative;
-            margin-top: -30px; /* Điều chỉnh từ -50px xuống -35px để bù 15px chênh lệch tâm */
+            margin-top: -50px; /* Khớp hoàn toàn với bao trên */
             width: 100%; max-width: 480px;
-            height: 410px; /* 380px cạnh bên + 30px chóp tam giác */
+            height: 380px; /* Khớp hoàn toàn chiều cao bao trên */
             background: #f0dad8;
             pointer-events: none;
-            clip-path: polygon(0 0, 100% 0, 100% 380px, 50% 100%, 0 380px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            /* Shadow cho cả khối (bao gồm cả phần chóp ở ::after) */
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.08));
+        }
+
+        /* Tạo chóp tam giác ở đáy bao dưới */
+        .fixed-sleeve-back::after {
+            content: '';
+            position: absolute;
+            top: 100%; left: 0; width: 100%; height: 30px;
+            background: inherit;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
         }
 
         /* 2. NHÂN THIỆP A */
