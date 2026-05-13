@@ -419,6 +419,11 @@
                 // Trượt đồng bộ 2 lớp bao
                 sleeve.style.transform = `translateY(${offset}px)`;
                 sleeveBack.style.transform = `translateY(${offset}px)`;
+
+                // HIỆN LẠI BAO THIỆP KHI QUAY VỀ SLIDE 1
+                const sleeveFade = Math.min(1, Math.max(0, (1 - ratio) / 0.2));
+                sleeve.style.opacity = sleeveFade;
+                sleeveBack.style.opacity = sleeveFade;
                 
                 // Trượt nhân thiệp
                 const currentOffset = -100 * (1 - ratio);
@@ -434,6 +439,10 @@
                 cardA.style.transform = `translateY(${-overScroll}px)`;
                 if (index >= 2) cardA.style.opacity = 0;
                 else cardA.style.opacity = 1;
+                
+                // Bao thiệp ẩn hoàn toàn khi qua Slide 1
+                sleeve.style.opacity = 0;
+                sleeveBack.style.opacity = 0;
                 
                 cardAText.style.opacity = 1;
                 cardA.style.setProperty('--card-bg-opacity', 1);
