@@ -40,15 +40,27 @@
             position: relative;
         }
 
-        /* KHUNG CHỨA CỐ ĐỊNH - DÙNG FLEX ĐỂ CĂN GIỮA CHUẨN NHƯ V1 */
-        .fixed-stage {
+        /* KHUNG CHỨA CỐ ĐỊNH - DÙNG 3 TẦNG ĐỂ QUẢN LÝ Z-INDEX */
+        .fixed-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100dvh;
             display: flex; justify-content: center; align-items: center;
-            pointer-events: none; z-index: 50;
+            pointer-events: none;
         }
 
-        /* NHÂN THIỆP A */
+        /* 1. BAO THIỆP DƯỚI (MẶT SAU) */
+        .fixed-sleeve-back {
+            position: relative;
+            margin-top: -30px; /* Điều chỉnh từ -50px xuống -35px để bù 15px chênh lệch tâm */
+            width: 100%; max-width: 480px;
+            height: 410px; /* 380px cạnh bên + 30px chóp tam giác */
+            background: #f0dad8;
+            pointer-events: none;
+            clip-path: polygon(0 0, 100% 0, 100% 380px, 50% 100%, 0 380px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* 2. NHÂN THIỆP A */
         .fixed-card-a {
             position: relative; 
             transform: translateY(-100px); 
@@ -57,7 +69,7 @@
             background: var(--card-white);
             border-radius: var(--card-radius);
             border: 8px solid #fff;
-            box-shadow: 0 15px 45px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15), 0 5px 15px rgba(0,0,0,0.05);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             text-align: center; padding: 40px 20px;
             pointer-events: none;
@@ -75,14 +87,7 @@
             z-index: 0;
         }
 
-        /* BAO THIỆP */
-        .fixed-sleeve-container {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100dvh;
-            display: flex; justify-content: center; align-items: center;
-            pointer-events: none; z-index: 100;
-        }
-
+        /* 3. BAO THIỆP TRÊN (MẶT TRƯỚC) */
         .fixed-sleeve {
             position: relative;
             margin-top: -50px;
@@ -90,8 +95,7 @@
             height: 380px;
             background: var(--sleeve-bg);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            /* Đổ bóng 4 chiều: shadow bên ngoài và shadow nội khối 4 cạnh */
-            box-shadow: 0 20px 60px rgba(0,0,0,0.12), inset 0 0 20px rgba(0,0,0,0.05);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
             pointer-events: none;
         }
 
@@ -125,7 +129,6 @@
             background: var(--card-white);
             border-radius: var(--card-radius);
             border: 8px solid #fff;
-            /* Shadow sâu và mềm mại hơn */
             box-shadow: 0 20px 50px rgba(0,0,0,0.15), 0 5px 15px rgba(0,0,0,0.05);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             text-align: center; padding: 40px 20px;
@@ -182,15 +185,14 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
-        /* KHI MÀN HÌNH QUÁ NGẮN -> Thu nhỏ toàn bộ thiệp theo tỷ lệ (giữ nguyên bố cục) */
         @media (max-height: 700px) {
-            .fixed-card-a, .card-b, .fixed-sleeve { scale: 0.9; }
+            .fixed-card-a, .card-b, .fixed-sleeve, .fixed-sleeve-back { scale: 0.9; }
         }
         @media (max-height: 620px) {
-            .fixed-card-a, .card-b, .fixed-sleeve { scale: 0.8; }
+            .fixed-card-a, .card-b, .fixed-sleeve, .fixed-sleeve-back { scale: 0.8; }
         }
         @media (max-height: 550px) {
-            .fixed-card-a, .card-b, .fixed-sleeve { scale: 0.7; }
+            .fixed-card-a, .card-b, .fixed-sleeve, .fixed-sleeve-back { scale: 0.7; }
         }
     </style>
 </head>
@@ -198,7 +200,13 @@
     <div class="page-bg"></div>
     <div class="leaf-container" id="leafContainer"></div>
 
-    <div class="fixed-stage">
+    <!-- TẦNG 1: BAO DƯỚI -->
+    <div class="fixed-container" style="z-index: 40;">
+        <div class="fixed-sleeve-back" id="fixedSleeveBack"></div>
+    </div>
+
+    <!-- TẦNG 2: NHÂN THIỆP -->
+    <div class="fixed-container" style="z-index: 50;">
         <div class="fixed-card-a bouncing" id="cardA">
             <div class="card-a-text" id="cardAText">
                 <span id="cardATopText" style="font-size: 0.8rem; letter-spacing: 4px; color: #ccc; text-transform: uppercase;"></span>
@@ -219,7 +227,8 @@
         </div>
     </div>
 
-    <div class="fixed-sleeve-container">
+    <!-- TẦNG 3: BAO TRÊN -->
+    <div class="fixed-container" style="z-index: 100;">
         <div class="fixed-sleeve" id="fixedSleeve">
             <div class="sleeve-info" id="sleeveInfo">
                 <span id="invitationGreeting" style="font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: #aaa;"></span>
@@ -237,7 +246,7 @@
         <section class="slide" id="slide3">
             <div class="card-b">
                 <h2 id="thankYouTitle" style="font-size: 2.8rem; margin-bottom: 20px;"></h2>
-                <p id="thankYouMessage" style="font-size: 0.95rem; line-height: 1.8; color: #666; padding: 50 50px;"></p>
+                <p id="thankYouMessage" style="font-size: 0.95rem; line-height: 1.8; color: #666; padding: 0 50px;"></p>
                 <div id="qrContainer"></div>
             </div>
         </section>
@@ -261,8 +270,6 @@
             cardATopText: "Wedding Invitation",
             scrollHint: "RÚT THIỆP ↑",
             qrText: "MỪNG CƯỚI ONLINE",
-            
-            // Danh sách ảnh lá phong trong folder img/
             leafImages: [
                 'img/maple_leaf/leaf_1.png',
                 'img/maple_leaf/leaf_2.png',
@@ -279,7 +286,6 @@
                 const el = document.getElementById(id);
                 if (el) el.innerHTML = html;
             };
-
             setSafeHTML('coupleNamesA', `${CONFIG.groomName}<br><span style="font-size: 1.2rem; display: inline-block; margin: 0px 0;">&</span><br>${CONFIG.brideName}`);
             setSafeText('eventTitle', CONFIG.eventTitle);
             setSafeText('eventTime', CONFIG.eventTime);
@@ -345,7 +351,7 @@
             leaf.style.width = size + 'px';
             leaf.style.height = size + 'px';
             leaf.style.transform = `rotate(${Math.random() * 360}deg)`;
-            const duration = Math.random() * 3 + 5; // Rơi vừa phải trong 5-8s
+            const duration = Math.random() * 3 + 5;
             leaf.style.animation = `leaf-fall ${duration}s linear forwards`;
             container.appendChild(leaf);
             setTimeout(() => { if (leaf.parentNode) leaf.remove(); }, duration * 1000);
@@ -364,6 +370,7 @@
 
         const slider = document.getElementById('slider');
         const sleeve = document.getElementById('fixedSleeve');
+        const sleeveBack = document.getElementById('fixedSleeveBack');
         const sleeveInfo = document.getElementById('sleeveInfo');
         const cardA = document.getElementById('cardA');
         const cardAText = document.getElementById('cardAText');
@@ -378,11 +385,9 @@
             if (scrollTop === 0) cardA.classList.add('bouncing');
             else cardA.classList.remove('bouncing');
 
-            // Hiệu ứng mờ dần riêng biệt
+            // 1. Hiệu ứng mờ dần hint và info
             if (scrollTop <= vh) {
-                // Text "Rút Thiệp" mờ rất nhanh (10%)
                 scrollHint.style.opacity = Math.max(0, 1 - (scrollTop / (vh * 0.1)));
-                // Sleeve Info mờ chậm hơn (40%)
                 sleeveInfo.style.opacity = Math.max(0, 1 - (scrollTop / (vh * 0.4)));
             } else {
                 scrollHint.style.opacity = 0;
@@ -394,18 +399,23 @@
                 else s.classList.remove('active');
             });
 
+            // 2. Logic trượt và Fade nội dung thiệp
             if (scrollTop <= vh) {
                 const ratio = scrollTop / vh;
-                sleeve.style.transform = `translateY(${-scrollTop}px)`;
+                const offset = -scrollTop;
+                
+                // Trượt đồng bộ 2 lớp bao
+                sleeve.style.transform = `translateY(${offset}px)`;
+                sleeveBack.style.transform = `translateY(${offset}px)`;
+                
+                // Trượt nhân thiệp
                 const currentOffset = -100 * (1 - ratio);
                 cardA.style.transform = `translateY(${currentOffset}px)`;
                 
-                // CHỈNH TỐC ĐỘ FADE TẠI ĐÂY:
+                // Fade nội dung thiệp (0.3 - 0.7)
                 const cardFade = Math.min(1, Math.max(0, (ratio - 0.3) / 0.4));
-                
                 cardAText.style.opacity = cardFade;
                 cardA.style.setProperty('--card-bg-opacity', cardFade);
-                
                 cardA.style.opacity = 1;
             } else {
                 const overScroll = scrollTop - vh;
@@ -413,7 +423,6 @@
                 if (index >= 2) cardA.style.opacity = 0;
                 else cardA.style.opacity = 1;
                 
-                // Luôn hiện khi đã qua slide 1
                 cardAText.style.opacity = 1;
                 cardA.style.setProperty('--card-bg-opacity', 1);
             }
