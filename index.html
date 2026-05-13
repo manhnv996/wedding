@@ -40,7 +40,7 @@
             position: relative;
         }
 
-        /* KHUNG CHỨA CỐ ĐỊNH - DÙNG 3 TẦNG ĐỂ QUẢN LÝ Z-INDEX */
+        /* KHUNG CHỨA CỐ ĐỊNH */
         .fixed-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100dvh;
@@ -52,18 +52,16 @@
         .fixed-sleeve-back {
             position: relative;
             margin-top: -50px;
-            width: 100%; max-width: 520px;
+            width: 100%; max-width: 480px;
             height: 380px;
             background: #f0dad8;
             pointer-events: none;
-            /* Tối ưu mobile */
             will-change: transform;
+            -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
-            transform: translateZ(0);
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
 
-        /* Tạo chóp tam giác ở đáy bao dưới */
         .fixed-sleeve-back::after {
             content: '';
             position: absolute;
@@ -86,6 +84,9 @@
             text-align: center; padding: 40px 20px;
             pointer-events: none;
             transition: opacity 0.2s ease-in-out;
+            will-change: transform, opacity;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
         }
 
         .fixed-card-a::before {
@@ -103,12 +104,15 @@
         .fixed-sleeve {
             position: relative;
             margin-top: -50px;
-            width: 100%; max-width: 520px;
+            width: 100%; max-width: 480px;
             height: 380px;
             background: var(--sleeve-bg);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
             pointer-events: none;
+            will-change: transform;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
         }
 
         .sleeve-info {
@@ -133,7 +137,6 @@
         .info-divider { width: 80px; height: 1px; background: var(--autumn-orange); margin: 25px auto; opacity: 0.2; }
         .details-text { font-size: 1rem; line-height: 1.8; color: #444; }
 		
-		/* Nhân thiệp B (Slide 3) */
 		.card-b {
 			position: relative;
 			width: 90%; max-width: 400px;
@@ -141,7 +144,6 @@
 			background: var(--card-white);
 			border-radius: var(--card-radius);
 			border: 8px solid #fff;
-			/* Shadow sâu và mềm mại giống cardA */
 			box-shadow: 0 20px 50px rgba(0,0,0,0.15), 0 5px 15px rgba(0,0,0,0.05);
 			display: flex; flex-direction: column; align-items: center; justify-content: center;
 			text-align: center; padding: 40px 20px;
@@ -149,7 +151,6 @@
 			opacity: 0;
 			transform: scale(0.95) translateY(20px);
 			transition: opacity 0.2s ease-out, transform 0.2s ease-out;
-			/* Đồng bộ z-index tầng 2 */
 			z-index: 50;
 		}
 
@@ -163,10 +164,7 @@
             z-index: -1;
         }
 
-        #slide3.active .card-b {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-        }
+        #slide3.active .card-b { opacity: 1; transform: scale(1) translateY(0); }
 
         .leaf-container { position: fixed; top: 0; left: 0; width: 100%; height: 100dvh; pointer-events: none; z-index: 150; overflow: hidden; }
         .leaf { position: absolute; top: -50px; }
@@ -185,13 +183,8 @@
         }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-        .fixed-card-a.bouncing {
-            animation: card-bounce 2s infinite;
-        }
-        @keyframes card-bounce { 
-            0%, 100% { transform: translateY(-100px); } 
-            50% { transform: translateY(-120px); } 
-        }
+        .fixed-card-a.bouncing { animation: card-bounce 2s infinite; }
+        @keyframes card-bounce { 0%, 100% { transform: translateY(-100px); } 50% { transform: translateY(-120px); } }
 
         .qr-card-wrap {
             margin-top: 25px; padding: 10px; background: #fff; 
@@ -199,27 +192,16 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
-        @media (max-height: 700px) {
-            .fixed-card-a, .card-b, .fixed-sleeve, .fixed-sleeve-back { scale: 0.9; }
-        }
-        @media (max-height: 620px) {
-            .fixed-card-a, .card-b, .fixed-sleeve, .fixed-sleeve-back { scale: 0.8; }
-        }
-        @media (max-height: 550px) {
-            .fixed-card-a, .card-b, .fixed-sleeve, .fixed-sleeve-back { scale: 0.7; }
-        }
+        @media (max-height: 700px) { .fixed-card-a, .card-b, .fixed-sleeve, .fixed-sleeve-back { scale: 0.9; } }
+        @media (max-height: 620px) { .fixed-card-a, .card-b, .fixed-sleeve, .fixed-sleeve-back { scale: 0.8; } }
+        @media (max-height: 550px) { .fixed-card-a, .card-b, .fixed-sleeve, .fixed-sleeve-back { scale: 0.7; } }
     </style>
 </head>
 <body>
     <div class="page-bg"></div>
     <div class="leaf-container" id="leafContainer"></div>
 
-    <!-- TẦNG 1: BAO DƯỚI -->
-    <div class="fixed-container" style="z-index: 40;">
-        <div class="fixed-sleeve-back" id="fixedSleeveBack"></div>
-    </div>
-
-    <!-- TẦNG 2: NHÂN THIỆP -->
+    <div class="fixed-container" style="z-index: 40;"><div class="fixed-sleeve-back" id="fixedSleeveBack"></div></div>
     <div class="fixed-container" style="z-index: 50;">
         <div class="fixed-card-a bouncing" id="cardA">
             <div class="card-a-text" id="cardAText">
@@ -240,8 +222,6 @@
             </div>
         </div>
     </div>
-
-    <!-- TẦNG 3: BAO TRÊN -->
     <div class="fixed-container" style="z-index: 100;">
         <div class="fixed-sleeve" id="fixedSleeve">
             <div class="sleeve-info" id="sleeveInfo">
@@ -253,9 +233,7 @@
     </div>
 
     <div class="slider-container" id="slider">
-        <section class="slide" id="slide1">
-            <div class="scroll-hint" id="scrollHint"></div>
-        </section>
+        <section class="slide" id="slide1"><div class="scroll-hint" id="scrollHint"></div></section>
         <section class="slide" id="slide2"></section>
         <section class="slide" id="slide3">
             <div class="card-b">
@@ -268,51 +246,24 @@
 
     <script>
         const CONFIG = {
-            groomName: "Văn Mạnh",
-            brideName: "Huyền Trang",
-            eventTitle: "LỄ THÀNH HÔN",
-            eventTime: "11:00 AM | Chủ nhật",
-            eventDate: "20 . 12 . 2026",
-            locationTitle: "ĐỊA ĐIỂM",
-            locationName: "Trung tâm Hội nghị Tiệc cưới ABC",
-            locationAddress: "123 Đường Láng, Đống Đa, Hà Nội",
-            thankYouTitle: "Thank You!",
-            thankYouMessage: "Sự hiện diện của bạn là niềm vinh hạnh lớn nhất đối với gia đình chúng mình.",
-            defaultGuest: "Bạn và Gia Đình",
-            invitationGreeting: "Thân mời",
-            sleeveHint: "VUỐT LÊN ĐỂ RÚT THIỆP",
-            cardATopText: "Wedding Invitation",
-            scrollHint: "RÚT THIỆP ↑",
-            qrText: "MỪNG CƯỚI ONLINE",
-            leafImages: [
-                'img/maple_leaf/leaf_1.png',
-                'img/maple_leaf/leaf_2.png',
-                'img/maple_leaf/leaf_3.png'
-            ]
+            groomName: "Văn Mạnh", brideName: "Huyền Trang",
+            eventTitle: "LỄ THÀNH HÔN", eventTime: "11:00 AM | Chủ nhật", eventDate: "20 . 12 . 2026",
+            locationTitle: "ĐỊA ĐIỂM", locationName: "Trung tâm Hội nghị Tiệc cưới ABC", locationAddress: "123 Đường Láng, Đống Đa, Hà Nội",
+            thankYouTitle: "Thank You!", thankYouMessage: "Sự hiện diện của bạn là niềm vinh hạnh lớn nhất đối với gia đình chúng mình.",
+            defaultGuest: "Bạn và Gia Đình", invitationGreeting: "Thân mời",
+            sleeveHint: "VUỐT LÊN ĐỂ RÚT THIỆP", cardATopText: "Wedding Invitation", scrollHint: "RÚT THIỆP ↑", qrText: "MỪNG CƯỚI ONLINE",
+            leafImages: ['img/maple_leaf/leaf_1.png', 'img/maple_leaf/leaf_2.png', 'img/maple_leaf/leaf_3.png']
         };
 
         function applyConfig() {
-            const setSafeText = (id, text) => {
-                const el = document.getElementById(id);
-                if (el) el.textContent = text;
-            };
-            const setSafeHTML = (id, html) => {
-                const el = document.getElementById(id);
-                if (el) el.innerHTML = html;
-            };
+            const setSafeText = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
+            const setSafeHTML = (id, html) => { const el = document.getElementById(id); if (el) el.innerHTML = html; };
             setSafeHTML('coupleNamesA', `${CONFIG.groomName}<br><span style="font-size: 1.2rem; display: inline-block; margin: 0px 0;">&</span><br>${CONFIG.brideName}`);
-            setSafeText('eventTitle', CONFIG.eventTitle);
-            setSafeText('eventTime', CONFIG.eventTime);
-            setSafeText('eventDate', CONFIG.eventDate);
-            setSafeText('locationTitle', CONFIG.locationTitle);
-            setSafeText('locationName', CONFIG.locationName);
-            setSafeText('locationAddress', CONFIG.locationAddress);
-            setSafeText('thankYouTitle', CONFIG.thankYouTitle);
-            setSafeText('thankYouMessage', CONFIG.thankYouMessage);
-            setSafeText('invitationGreeting', CONFIG.invitationGreeting);
-            setSafeText('sleeveHint', CONFIG.sleeveHint);
-            setSafeText('cardATopText', CONFIG.cardATopText);
-            setSafeText('scrollHint', CONFIG.scrollHint);
+            setSafeText('eventTitle', CONFIG.eventTitle); setSafeText('eventTime', CONFIG.eventTime); setSafeText('eventDate', CONFIG.eventDate);
+            setSafeText('locationTitle', CONFIG.locationTitle); setSafeText('locationName', CONFIG.locationName); setSafeText('locationAddress', CONFIG.locationAddress);
+            setSafeText('thankYouTitle', CONFIG.thankYouTitle); setSafeText('thankYouMessage', CONFIG.thankYouMessage);
+            setSafeText('invitationGreeting', CONFIG.invitationGreeting); setSafeText('sleeveHint', CONFIG.sleeveHint);
+            setSafeText('cardATopText', CONFIG.cardATopText); setSafeText('scrollHint', CONFIG.scrollHint);
         }
 
         const state = { guest: CONFIG.defaultGuest, showQr: false };
@@ -325,8 +276,7 @@
                 if (!val) return null;
                 try { return decodeURIComponent(val); } catch (e) { return val; }
             };
-            let guest = getParam('to');
-            let showQr = getParam('qr');
+            let guest = getParam('to'); let showQr = getParam('qr');
             const payload = urlParams.get('p');
             if (payload) {
                 try {
@@ -341,12 +291,7 @@
             state.showQr = (showQr === 'true');
             const qrContainer = document.getElementById('qrContainer');
             if (state.showQr) {
-                qrContainer.innerHTML = `
-                    <div class="qr-card-wrap">
-                        <img src="img/qr.jpg" style="width: 140px; height: 140px; border-radius: 12px;" alt="QR">
-                        <p style="font-size: 0.7rem; color: #bbb; margin-top: 8px;">${CONFIG.qrText}</p>
-                    </div>
-                `;
+                qrContainer.innerHTML = `<div class="qr-card-wrap"><img src="img/qr.jpg" style="width: 140px; height: 140px; border-radius: 12px;" alt="QR"><p style="font-size: 0.7rem; color: #bbb; margin-top: 8px;">${CONFIG.qrText}</p></div>`;
             } else {
                 qrContainer.innerHTML = `<div style="font-size: 4rem; opacity: 0.1; margin: 30px 0;">💍</div>`;
             }
@@ -354,32 +299,21 @@
 
         let leafInterval = null;
         function spawnLeaf() {
-            const container = document.getElementById('leafContainer');
-            if (!container) return;
-            const leaf = document.createElement('div');
-            leaf.className = 'leaf';
+            const container = document.getElementById('leafContainer'); if (!container) return;
+            const leaf = document.createElement('div'); leaf.className = 'leaf';
             const randomLeaf = CONFIG.leafImages[Math.floor(Math.random() * CONFIG.leafImages.length)];
             leaf.innerHTML = `<img src="${randomLeaf}" style="width: 100%; height: 100%; object-fit: contain;">`;
             leaf.style.left = Math.random() * 100 + '%';
-            const size = (Math.random() * 30 + 20);
-            leaf.style.width = size + 'px';
-            leaf.style.height = size + 'px';
+            const size = (Math.random() * 30 + 20); leaf.style.width = size + 'px'; leaf.style.height = size + 'px';
             leaf.style.transform = `rotate(${Math.random() * 360}deg)`;
-            const duration = Math.random() * 3 + 5;
-            leaf.style.animation = `leaf-fall ${duration}s linear forwards`;
-            container.appendChild(leaf);
-            setTimeout(() => { if (leaf.parentNode) leaf.remove(); }, duration * 1000);
+            const duration = Math.random() * 3 + 5; leaf.style.animation = `leaf-fall ${duration}s linear forwards`;
+            container.appendChild(leaf); setTimeout(() => { if (leaf.parentNode) leaf.remove(); }, duration * 1000);
         }
 
         function manageLeaves(scrollTop, vh) {
             if (scrollTop > vh * 0.1) {
-                if (!leafInterval) {
-                    for (let i = 0; i < 5; i++) setTimeout(spawnLeaf, Math.random() * 500);
-                    leafInterval = setInterval(spawnLeaf, 300);
-                }
-            } else {
-                if (leafInterval) { clearInterval(leafInterval); leafInterval = null; }
-            }
+                if (!leafInterval) { for (let i = 0; i < 5; i++) setTimeout(spawnLeaf, Math.random() * 500); leafInterval = setInterval(spawnLeaf, 300); }
+            } else { if (leafInterval) { clearInterval(leafInterval); leafInterval = null; } }
         }
 
         const slider = document.getElementById('slider');
@@ -399,53 +333,32 @@
             if (scrollTop === 0) cardA.classList.add('bouncing');
             else cardA.classList.remove('bouncing');
 
-            // 1. Hiệu ứng mờ dần hint và info
             if (scrollTop <= vh) {
                 scrollHint.style.opacity = Math.max(0, 1 - (scrollTop / (vh * 0.1)));
                 sleeveInfo.style.opacity = Math.max(0, 1 - (scrollTop / (vh * 0.4)));
             } else {
-                scrollHint.style.opacity = 0;
-                sleeveInfo.style.opacity = 0;
+                scrollHint.style.opacity = 0; sleeveInfo.style.opacity = 0;
             }
 
-            slides.forEach((s, i) => {
-                if (i === index) s.classList.add('active');
-                else s.classList.remove('active');
-            });
+            slides.forEach((s, i) => { if (i === index) s.classList.add('active'); else s.classList.remove('active'); });
 
-            // 2. Logic trượt và Fade nội dung thiệp
             if (scrollTop <= vh) {
                 const ratio = scrollTop / vh;
-                const offset = -scrollTop;
-                
-                // Trượt đồng bộ 2 lớp bao
-                sleeve.style.transform = `translateY(${offset}px)`;
-                sleeveBack.style.transform = `translateY(${offset}px)`;
+                const sleeveTransform = `translateY(${-scrollTop}px) translateZ(0)`;
+                sleeve.style.transform = sleeveTransform;
+                sleeveBack.style.transform = sleeveTransform;
+                sleeve.style.opacity = 1; sleeveBack.style.opacity = 1; // Luôn hiện bao thiệp
 
-                // // HIỆN LẠI BAO THIỆP KHI QUAY VỀ SLIDE 1
-                // const sleeveFade = Math.min(1, Math.max(0, (1 - ratio) / 0.3));
-                // sleeve.style.opacity = sleeveFade;
-                // sleeveBack.style.opacity = sleeveFade;
-                
-                // Trượt nhân thiệp
                 const currentOffset = -100 * (1 - ratio);
-                cardA.style.transform = `translateY(${currentOffset}px)`;
-                
-                // Fade nội dung thiệp (0.3 - 0.7)
+                cardA.style.transform = `translateY(${currentOffset}px) translateZ(0)`;
                 const cardFade = Math.min(1, Math.max(0, (ratio - 0.3) / 0.4));
                 cardAText.style.opacity = cardFade;
                 cardA.style.setProperty('--card-bg-opacity', cardFade);
                 cardA.style.opacity = 1;
             } else {
                 const overScroll = scrollTop - vh;
-                cardA.style.transform = `translateY(${-overScroll}px)`;
-                if (index >= 2) cardA.style.opacity = 0;
-                else cardA.style.opacity = 1;
-                
-                // // Bao thiệp ẩn hoàn toàn khi qua Slide 1
-                // sleeve.style.opacity = 0;
-                // sleeveBack.style.opacity = 0;
-                
+                cardA.style.transform = `translateY(${-overScroll}px) translateZ(0)`;
+                if (index >= 2) cardA.style.opacity = 0; else cardA.style.opacity = 1;
                 cardAText.style.opacity = 1;
                 cardA.style.setProperty('--card-bg-opacity', 1);
             }
