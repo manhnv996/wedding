@@ -149,8 +149,6 @@
 			text-align: center; padding: 40px 20px;
 			margin: 0 auto;
 			opacity: 0;
-			transform: scale(0.95) translateY(20px);
-			transition: opacity 0.2s ease-out, transform 0.2s ease-out;
 			z-index: 50;
 		}
 
@@ -164,7 +162,6 @@
             z-index: -1;
         }
 
-        .card-b.active { opacity: 1; transform: scale(1) translateY(0); }
 
         .leaf-container { position: fixed; top: 0; left: 0; width: 100%; height: 100dvh; pointer-events: none; z-index: 150; overflow: hidden; }
         .leaf { position: absolute; top: -50px; }
@@ -346,14 +343,13 @@
 
             slides.forEach((s, i) => { if (i === index) s.classList.add('active'); else s.classList.remove('active'); });
             if (scrollTop >= vh) {
-                // Container vào rendering tree khi snap xong slide 2 (không giữa animation slide 1→2)
                 if (cardBContainer.style.display === 'none') cardBContainer.style.display = '';
-                if (index >= 2) cardB.classList.add('active');
-                else cardB.classList.remove('active');
+                const ratio2 = (scrollTop - vh) / vh;
+                const t = Math.min(1, Math.max(0, ratio2));
+                cardB.style.opacity = Math.min(1, Math.max(0, (ratio2 - 0.3) / 0.5));
+                cardB.style.transform = `scale(${0.95 + 0.05 * t}) translateY(${20 * (1 - t)}px)`;
             } else {
-                // Ẩn hoàn toàn khi đang ở vùng slide 1 (card-B đang opacity:0 — safe to display:none)
-                cardB.classList.remove('active');
-                cardBContainer.style.display = 'none';
+                if (cardBContainer.style.display !== 'none') cardBContainer.style.display = 'none';
             }
 
             if (scrollTop <= vh) {
