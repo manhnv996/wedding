@@ -164,7 +164,7 @@
             z-index: -1;
         }
 
-        #slide3.active .card-b { opacity: 1; transform: scale(1) translateY(0); }
+        .card-b.active { opacity: 1; transform: scale(1) translateY(0); }
 
         .leaf-container { position: fixed; top: 0; left: 0; width: 100%; height: 100dvh; pointer-events: none; z-index: 150; overflow: hidden; }
         .leaf { position: absolute; top: -50px; }
@@ -232,16 +232,18 @@
         </div>
     </div>
 
+    <div class="fixed-container" id="cardBContainer" style="z-index: 70; display: none;">
+        <div class="card-b" id="cardB">
+            <h2 id="thankYouTitle" style="font-size: 2.8rem; margin-bottom: 20px;"></h2>
+            <p id="thankYouMessage" style="font-size: 0.95rem; line-height: 1.8; color: #666; padding: 0 50px;"></p>
+            <div id="qrContainer"></div>
+        </div>
+    </div>
+
     <div class="slider-container" id="slider">
         <section class="slide" id="slide1"><div class="scroll-hint" id="scrollHint"></div></section>
         <section class="slide" id="slide2"></section>
-        <section class="slide" id="slide3">
-            <div class="card-b">
-                <h2 id="thankYouTitle" style="font-size: 2.8rem; margin-bottom: 20px;"></h2>
-                <p id="thankYouMessage" style="font-size: 0.95rem; line-height: 1.8; color: #666; padding: 0 50px;"></p>
-                <div id="qrContainer"></div>
-            </div>
-        </section>
+        <section class="slide" id="slide3"></section>
     </div>
 
     <script>
@@ -322,6 +324,8 @@
         const sleeveInfo = document.getElementById('sleeveInfo');
         const cardA = document.getElementById('cardA');
         const cardAText = document.getElementById('cardAText');
+        const cardB = document.getElementById('cardB');
+        const cardBContainer = document.getElementById('cardBContainer');
         const scrollHint = document.getElementById('scrollHint');
         const slides = document.querySelectorAll('.slide');
 
@@ -341,6 +345,16 @@
             }
 
             slides.forEach((s, i) => { if (i === index) s.classList.add('active'); else s.classList.remove('active'); });
+            if (scrollTop >= vh) {
+                // Container vào rendering tree khi snap xong slide 2 (không giữa animation slide 1→2)
+                if (cardBContainer.style.display === 'none') cardBContainer.style.display = '';
+                if (index >= 2) cardB.classList.add('active');
+                else cardB.classList.remove('active');
+            } else {
+                // Ẩn hoàn toàn khi đang ở vùng slide 1 (card-B đang opacity:0 — safe to display:none)
+                cardB.classList.remove('active');
+                cardBContainer.style.display = 'none';
+            }
 
             if (scrollTop <= vh) {
                 const ratio = scrollTop / vh;
