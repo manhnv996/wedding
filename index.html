@@ -346,8 +346,8 @@
                 if (cardBContainer.style.display === 'none') cardBContainer.style.display = '';
                 const ratio2 = (scrollTop - vh) / vh;
                 const t = Math.min(1, Math.max(0, ratio2));
-                cardB.style.opacity = Math.min(1, Math.max(0, (ratio2 - 0.3) / 0.5));
-                cardB.style.transform = `scale(${0.95 + 0.05 * t}) translateY(${20 * (1 - t)}px)`;
+                cardB.style.opacity = Math.min(1, Math.max(0, (ratio2 - 0.2) / 0.5));
+                cardB.style.transform = `translateY(${vh * 0.4 * (1 - t)}px) translateZ(0)`;
             } else {
                 if (cardBContainer.style.display !== 'none') cardBContainer.style.display = 'none';
             }
