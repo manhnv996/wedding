@@ -385,8 +385,10 @@
                 // card-A: 0 → -G (cùng tốc độ card-B)
                 cardA.style.transform = `translateY(${-G * ratio2}px) translateZ(0)`;
                 cardA.style.opacity = 1;
-                cardAText.style.opacity = 1;
-                cardA.style.setProperty('--card-bg-opacity', 1);
+                // Fade out nội dung + bg ảnh (ngược chiều card-B)
+                const cardAFade = 1 - Math.min(1, Math.max(0, (ratio2 - 0.3) / 0.4));
+                cardAText.style.opacity = cardAFade;
+                cardA.style.setProperty('--card-bg-opacity', cardAFade);
             }
             manageLeaves(scrollTop, vh);
         });
