@@ -368,11 +368,13 @@
             const now = performance.now();
             const index = Math.round(scrollTop / vh);
 
-            // Đo velocity
+            // Đo velocity — chỉ bật fast mode khi scroll giữa slide 2↔3
             const dt = now - lastScrollTime;
-            if (dt > 0) {
+            if (dt > 0 && scrollTop > vh) {
                 const velocity = Math.abs(scrollTop - lastScrollTop) / dt * 1000; // px/s
                 setFastMode(velocity > FAST_THRESHOLD);
+            } else if (scrollTop <= vh) {
+                setFastMode(false);
             }
             lastScrollTop = scrollTop;
             lastScrollTime = now;
