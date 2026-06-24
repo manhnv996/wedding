@@ -165,8 +165,8 @@
             z-index: -1;
         }
 
-        /* Khi vuốt nhanh: ::before fade mượt bằng CSS transition thay vì scroll-driven */
-        .fast-fade::before { transition: opacity 0.5s ease; }
+        /* Micro-transition cho ::before — smooth fade khi scroll */
+        .fast-fade::before { transition: opacity 0.15s ease; }
 
         .leaf-container { position: fixed; top: 0; left: 0; width: 100%; height: 100dvh; pointer-events: none; z-index: 150; overflow: hidden; }
         .leaf { position: absolute; top: -50px; }
@@ -334,24 +334,28 @@
         const scrollHint = document.getElementById('scrollHint');
         const slides = document.querySelectorAll('.slide');
 
-        // Velocity detection: đo tốc độ scroll để chuyển mode fade
-        const FAST_THRESHOLD = 3000; // px/s — trên ngưỡng này = vuốt nhanh
+        /*--- [DISABLED] Velocity detection - giữ lại để revert khi cần ---
+        const FAST_THRESHOLD = 3000; // px/s
         const TRANSITION_DURATION = '1s';
-        let lastScrollTop = 0;
-        let lastScrollTime = 0;
-        let isFastMode = false;
-        let fastFadeDirection = 0; // 1 = đang fade in, -1 = đang fade out, 0 = chưa set
+        let lastScrollTop = 0; let lastScrollTime = 0;
+        let isFastMode = false; let fastFadeDirection = 0;
         const fadeTargets = [cardAText, cardBText];
-
         function setFastMode(on) {
-            if (isFastMode === on) return;
-            isFastMode = on;
+            if (isFastMode === on) return; isFastMode = on;
             const val = on ? `opacity ${TRANSITION_DURATION} ease` : '';
             fadeTargets.forEach(el => el.style.transition = val);
             cardA.classList.toggle('fast-fade', on);
             cardB.classList.toggle('fast-fade', on);
-            if (!on) fastFadeDirection = 0; // reset khi tắt fast mode
+            if (!on) fastFadeDirection = 0;
         }
+        ---*/
+
+        // Approach: micro-transition luôn bật — smooth cả vuốt chậm lẫn nhanh
+        const FADE_TRANSITION = '0.15s'; // đủ ngắn để không lag khi vuốt chậm, đủ dài để smooth khi nhanh
+        cardAText.style.transition = `opacity ${FADE_TRANSITION} ease`;
+        cardBText.style.transition = `opacity ${FADE_TRANSITION} ease`;
+        cardA.classList.add('fast-fade'); // bật transition cho ::before
+        cardB.classList.add('fast-fade');
 
         let scrollTick = false;
         slider.addEventListener('scroll', () => {
@@ -366,23 +370,7 @@
         function handleScroll() {
             const scrollTop = slider.scrollTop;
             const vh = window.innerHeight;
-            const now = performance.now();
             const index = Math.round(scrollTop / vh);
-
-            // Đo velocity — bật khi vuốt tiến (slide 1→2, 2→3), tắt khi vuốt lùi về slide 1
-            const dt = now - lastScrollTime;
-            const delta = scrollTop - lastScrollTop;
-            if (dt > 0) {
-                const velocity = Math.abs(delta) / dt * 1000; // px/s
-                if (delta < 0 && scrollTop <= vh * 0.5) {
-                    // Đang vuốt lùi VÀ gần slide 1 → tắt fast mode
-                    setFastMode(false);
-                } else {
-                    setFastMode(velocity > FAST_THRESHOLD);
-                }
-            }
-            lastScrollTop = scrollTop;
-            lastScrollTime = now;
 
             if (scrollTop === 0) cardA.classList.add('bouncing');
             else cardA.classList.remove('bouncing');
@@ -396,10 +384,6 @@
 
             slides.forEach((s, i) => { if (i === index) s.classList.add('active'); else s.classList.remove('active'); });
 
-            // G = khoảng cách cố định giữa tâm 2 card khi scroll
-            // Công thức: max(CARD_H+40, vh/2+CARD_H/2+30) đảm bảo:
-            //   - edge-to-edge gap >= 40px (không lồng nhau ở mọi màn hình)
-            //   - card-A vừa thoát màn hình khi đến slide 3
             const CARD_H = 650;
             const G = Math.max(CARD_H + 40, Math.round(vh / 2) + Math.round(CARD_H / 2) + 30);
 
@@ -407,20 +391,10 @@
                 if (cardBContainer.style.display === 'none') cardBContainer.style.display = '';
                 const overScroll2 = scrollTop - vh;
                 const ratio2 = overScroll2 / vh;
-                // card-B: G → 0 (cùng tốc độ card-A, gap luôn = G)
                 cardB.style.transform = `translateY(${G * (1 - ratio2)}px) translateZ(0)`;
-                if (!isFastMode) {
-                    // Vuốt bình thường: fade liên tục theo scroll
-                    const cardBFade = Math.min(1, Math.max(0, (ratio2 - 0.3) / 0.4));
-                    cardBText.style.opacity = cardBFade;
-                    cardB.style.setProperty('--card-bg-opacity', cardBFade);
-                } else if (fastFadeDirection !== (delta > 0 ? 1 : -1)) {
-                    // Vuốt nhanh: set target 1 lần, CSS transition lo animate
-                    fastFadeDirection = delta > 0 ? 1 : -1;
-                    const target = delta > 0 ? 1 : 0; // tiến → hiện, lùi → ẩn
-                    cardBText.style.opacity = target;
-                    cardB.style.setProperty('--card-bg-opacity', target);
-                }
+                const cardBFade = Math.min(1, Math.max(0, (ratio2 - 0.3) / 0.4));
+                cardBText.style.opacity = cardBFade;
+                cardB.style.setProperty('--card-bg-opacity', cardBFade);
             } else {
                 if (cardBContainer.style.display !== 'none') cardBContainer.style.display = 'none';
             }
@@ -434,34 +408,18 @@
 
                 const currentOffset = -100 * (1 - ratio);
                 cardA.style.transform = `translateY(${currentOffset}px) translateZ(0)`;
-                if (!isFastMode) {
-                    const cardFade = Math.min(1, Math.max(0, (ratio - 0.3) / 0.4));
-                    cardAText.style.opacity = cardFade;
-                    cardA.style.setProperty('--card-bg-opacity', cardFade);
-                } else if (fastFadeDirection !== (delta > 0 ? 1 : -1)) {
-                    fastFadeDirection = delta > 0 ? 1 : -1;
-                    const target = delta > 0 ? 1 : 0;
-                    cardAText.style.opacity = target;
-                    cardA.style.setProperty('--card-bg-opacity', target);
-                }
+                const cardFade = Math.min(1, Math.max(0, (ratio - 0.3) / 0.4));
+                cardAText.style.opacity = cardFade;
+                cardA.style.setProperty('--card-bg-opacity', cardFade);
                 cardA.style.opacity = 1;
             } else {
                 const overScroll2 = scrollTop - vh;
                 const ratio2 = overScroll2 / vh;
-                // card-A: 0 → -G (cùng tốc độ card-B)
                 cardA.style.transform = `translateY(${-G * ratio2}px) translateZ(0)`;
                 cardA.style.opacity = 1;
-                // Fade out nội dung + bg ảnh (ngược chiều card-B)
-                if (!isFastMode) {
-                    const cardAFade = 1 - Math.min(1, Math.max(0, (ratio2 - 0.3) / 0.4));
-                    cardAText.style.opacity = cardAFade;
-                    cardA.style.setProperty('--card-bg-opacity', cardAFade);
-                } else if (fastFadeDirection !== (delta > 0 ? 1 : -1)) {
-                    fastFadeDirection = delta > 0 ? 1 : -1;
-                    const target = delta > 0 ? 0 : 1; // tiến → ẩn card-A, lùi → hiện card-A
-                    cardAText.style.opacity = target;
-                    cardA.style.setProperty('--card-bg-opacity', target);
-                }
+                const cardAFade = 1 - Math.min(1, Math.max(0, (ratio2 - 0.3) / 0.4));
+                cardAText.style.opacity = cardAFade;
+                cardA.style.setProperty('--card-bg-opacity', cardAFade);
             }
             manageLeaves(scrollTop, vh);
         }
