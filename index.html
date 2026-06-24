@@ -149,6 +149,9 @@
 			text-align: center; padding: 40px 20px;
 			margin: 0 auto;
 			z-index: 50;
+			will-change: transform, opacity;
+			-webkit-backface-visibility: hidden;
+			backface-visibility: hidden;
 		}
 
         .card-b::before {
@@ -329,7 +332,17 @@
         const scrollHint = document.getElementById('scrollHint');
         const slides = document.querySelectorAll('.slide');
 
+        let scrollTick = false;
         slider.addEventListener('scroll', () => {
+            if (scrollTick) return;
+            scrollTick = true;
+            requestAnimationFrame(() => {
+                scrollTick = false;
+                handleScroll();
+            });
+        }, { passive: true });
+
+        function handleScroll() {
             const scrollTop = slider.scrollTop;
             const vh = window.innerHeight;
             const index = Math.round(scrollTop / vh);
@@ -391,7 +404,7 @@
                 cardA.style.setProperty('--card-bg-opacity', cardAFade);
             }
             manageLeaves(scrollTop, vh);
-        });
+        }
 
         window.onload = initParams;
     </script>
