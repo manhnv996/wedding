@@ -97,6 +97,7 @@
             background-size: cover; background-position: center;
             border-radius: calc(var(--card-radius) - 8px);
             opacity: var(--card-bg-opacity, 0);
+            transition: opacity 0.6s ease;
             z-index: 0;
         }
 
@@ -130,6 +131,7 @@
             opacity: 0; width: 100%;
             position: relative;
             z-index: 1;
+            transition: opacity 0.6s ease;
         }
 
         h1, h2 { font-family: 'Dancing Script', cursive; color: var(--autumn-red); }
@@ -162,6 +164,7 @@
             background-size: cover; background-position: center;
             border-radius: calc(var(--card-radius) - 8px);
             opacity: var(--card-bg-opacity, 0);
+            transition: opacity 0.6s ease;
             z-index: -1;
         }
 
@@ -234,7 +237,7 @@
 
     <div class="fixed-container" id="cardBContainer" style="z-index: 70; display: none;">
         <div class="card-b" id="cardB">
-            <div id="cardBText" style="opacity: 0; width: 100%; text-align: center;">
+            <div id="cardBText" style="opacity: 0; width: 100%; text-align: center; transition: opacity 0.6s ease;">
                 <h2 id="thankYouTitle" style="font-size: 2.8rem; margin-bottom: 20px;"></h2>
                 <p id="thankYouMessage" style="font-size: 0.95rem; line-height: 1.8; color: #666; padding: 0 50px;"></p>
                 <div id="qrContainer"></div>
@@ -372,9 +375,10 @@
                 const ratio2 = overScroll2 / vh;
                 // card-B: G → 0 (cùng tốc độ card-A, gap luôn = G)
                 cardB.style.transform = `translateY(${G * (1 - ratio2)}px) translateZ(0)`;
-                const cardBFade = Math.min(1, Math.max(0, (ratio2 - 0.3) / 0.4));
-                cardBText.style.opacity = cardBFade;
-                cardB.style.setProperty('--card-bg-opacity', cardBFade);
+                // Hybrid: JS set 0/1 theo ngưỡng, CSS transition lo mượt (0.3s)
+                const cardBShow = ratio2 > 0.4 ? 1 : 0;
+                cardBText.style.opacity = cardBShow;
+                cardB.style.setProperty('--card-bg-opacity', cardBShow);
             } else {
                 if (cardBContainer.style.display !== 'none') cardBContainer.style.display = 'none';
             }
@@ -388,9 +392,9 @@
 
                 const currentOffset = -100 * (1 - ratio);
                 cardA.style.transform = `translateY(${currentOffset}px) translateZ(0)`;
-                const cardFade = Math.min(1, Math.max(0, (ratio - 0.3) / 0.4));
-                cardAText.style.opacity = cardFade;
-                cardA.style.setProperty('--card-bg-opacity', cardFade);
+                const cardAShow = ratio > 0.4 ? 1 : 0;
+                cardAText.style.opacity = cardAShow;
+                cardA.style.setProperty('--card-bg-opacity', cardAShow);
                 cardA.style.opacity = 1;
             } else {
                 const overScroll2 = scrollTop - vh;
@@ -399,9 +403,9 @@
                 cardA.style.transform = `translateY(${-G * ratio2}px) translateZ(0)`;
                 cardA.style.opacity = 1;
                 // Fade out nội dung + bg ảnh (ngược chiều card-B)
-                const cardAFade = 1 - Math.min(1, Math.max(0, (ratio2 - 0.3) / 0.4));
-                cardAText.style.opacity = cardAFade;
-                cardA.style.setProperty('--card-bg-opacity', cardAFade);
+                const cardAShow = ratio2 > 0.4 ? 0 : 1;
+                cardAText.style.opacity = cardAShow;
+                cardA.style.setProperty('--card-bg-opacity', cardAShow);
             }
             manageLeaves(scrollTop, vh);
         }
