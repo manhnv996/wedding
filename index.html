@@ -336,7 +336,7 @@
 
         // Velocity detection: đo tốc độ scroll để chuyển mode fade
         const FAST_THRESHOLD = 3000; // px/s — trên ngưỡng này = vuốt nhanh
-        const TRANSITION_DURATION = '0.5s';
+        const TRANSITION_DURATION = '1s';
         let lastScrollTop = 0;
         let lastScrollTime = 0;
         let isFastMode = false;
@@ -368,13 +368,17 @@
             const now = performance.now();
             const index = Math.round(scrollTop / vh);
 
-            // Đo velocity — chỉ bật fast mode khi scroll giữa slide 2↔3
+            // Đo velocity — bật khi vuốt tiến (slide 1→2, 2→3), tắt khi vuốt lùi về slide 1
             const dt = now - lastScrollTime;
-            if (dt > 0 && scrollTop > vh) {
-                const velocity = Math.abs(scrollTop - lastScrollTop) / dt * 1000; // px/s
-                setFastMode(velocity > FAST_THRESHOLD);
-            } else if (scrollTop <= vh) {
-                setFastMode(false);
+            const delta = scrollTop - lastScrollTop;
+            if (dt > 0) {
+                const velocity = Math.abs(delta) / dt * 1000; // px/s
+                if (delta < 0 && scrollTop <= vh * 0.5) {
+                    // Đang vuốt lùi VÀ gần slide 1 → tắt fast mode
+                    setFastMode(false);
+                } else {
+                    setFastMode(velocity > FAST_THRESHOLD);
+                }
             }
             lastScrollTop = scrollTop;
             lastScrollTime = now;
